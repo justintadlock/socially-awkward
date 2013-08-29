@@ -29,7 +29,7 @@
 
 			<?php the_excerpt(); ?>
 			<?php $count = hybrid_get_gallery_item_count(); ?>
-			<p class="image-count"><?php printf( _n( 'This gallery contains %s item.', 'This gallery contains %s items.', $count, 'socially-awkward' ), $count ); ?></p>
+			<p class="gallery-count"><?php printf( _n( 'This gallery contains %s item.', 'This gallery contains %s items.', $count, 'socially-awkward' ), $count ); ?></p>
 
 		</div><!-- .entry-summary -->
 

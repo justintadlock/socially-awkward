@@ -22,8 +22,8 @@
 		<ul id="menu-formats-items" class="menu-items">
 
 			<?php if ( $url = socially_awkward_get_blog_url() ) { ?>
-				<li <?php echo is_home() ? 'class="current-menu-item"' : ''; ?>>
-				<a class="post-format-link post-format-link-standard" href="<?php echo esc_url( $url ); ?>" title="<?php _e( 'Articles' ); ?>">
+				<li class="menu-item-blog <?php echo is_home() ? 'current-menu-item' : ''; ?>">
+				<a href="<?php echo esc_url( $url ); ?>" title="<?php _e( 'Articles', 'socially-awkward' ); ?>">
 					<span class="screen-reader-text"><?php echo get_post_format_string( 'standard' ); ?></span>
 				</a>
 				</li>
@@ -32,8 +32,8 @@
 			<?php $formats = array( 'aside', 'link', 'quote', 'status', 'chat', 'gallery', 'image', 'audio', 'video' );
 
 			foreach ( $formats as $format ) { ?>
-				<li <?php echo is_tax( 'post_format', "post-format-{$format}" ) ? 'class="current-menu-item"' : ''; ?>>
-				<a class="post-format-link post-format-link-<?php echo $format; ?>" href="<?php echo get_post_format_link( $format ); ?>" title="<?php echo esc_attr( hybrid_get_plural_post_format_string( $format ) ); ?>">
+				<li class="menu-item-<?php echo esc_attr( $format ); ?> <?php echo is_tax( 'post_format', "post-format-{$format}" ) ? 'current-menu-item' : ''; ?>">
+				<a href="<?php echo get_post_format_link( $format ); ?>" title="<?php echo esc_attr( hybrid_get_plural_post_format_string( $format ) ); ?>">
 					<span class="screen-reader-text"><?php echo get_post_format_string( $format ); ?></span>
 				</a>
 				</li>
