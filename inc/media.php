@@ -177,6 +177,8 @@ function socially_awkward_get_audio_meta( $post_id = 0 ) {
 	$meta = wp_get_attachment_metadata( $post_id );
 	$items = array();
 
+	//var_dump( $meta );
+
 	if ( !empty( $meta['length_formatted'] ) )
 		$items['length_formatted'] = array( $meta['length_formatted'], __( 'Run Time', 'socially-awkward' ) );
 
@@ -298,13 +300,38 @@ function socially_awkward_list_video_meta( $post_id = 0 ) {
 	return socially_awkward_list_media_meta( array_merge( $defaults, $items ) );
 }
 
+/**************/
+
+function socially_awkward_get_audio_transcript( $post_id = 0 ) {
+
+	if ( empty( $post_id ) )
+		$post_id = get_the_ID();
+
+	/* Set up some default variables and get the image metadata. */
+	$meta = wp_get_attachment_metadata( $post_id );
+
+	/* Look for the 'unsynchronised_lyric' tag. */
+	if ( isset( $meta['unsynchronised_lyric'] ) )
+		$lyrics = $meta['unsynchronised_lyric'];
+
+	/* Seen this misspelling of the id3 tag. */
+	elseif ( isset( $meta['unsychronised_lyric'] ) || isset( $meta['unsynchronised_lyric'] ) )
+		$lyrics = $meta['unsychronised_lyric'];
+
+	/* If lyrics were found, run them through some of WP's text filters to make 'em purty. */
+	if ( !empty( $lyrics ) )
+		return wptexturize( convert_chars( wpautop( $lyrics ) ) );
+
+	return '';
+}
+
 
 /**************/
 
 function socially_awkward_audio_shortcode( $html, $atts, $audio, $post_id ) {
 
 	/* Don't show on single attachment pages. */
-	if ( is_attachment() || is_admin() )
+	if ( is_admin() )
 		return $html;
 
 	if ( is_object( $audio ) ) {
@@ -331,12 +358,14 @@ function socially_awkward_audio_shortcode( $html, $atts, $audio, $post_id ) {
 		if ( !empty( $image ) )
 			$html = '<div class="audio-shortcode-wrap">' . $image . $html . '</div>';
 
-		$html .= '<div class="media-shortcode-extend">';
-		$html .= '<div class="audio-info">';
-		$html .= socially_awkward_list_audio_meta( $attachment_id );
-		$html .= '</div>';
-		$html .= '<a class="media-info-toggle">' . __( 'Audio Info', 'socially-awkward' ) . '</a>';
-		$html .= '</div>';
+		if ( !is_attachment() ) {
+			$html .= '<div class="media-shortcode-extend">';
+			$html .= '<div class="audio-info">';
+			$html .= socially_awkward_list_audio_meta( $attachment_id );
+			$html .= '</div>';
+			$html .= '<a class="media-info-toggle">' . __( 'Audio Info', 'socially-awkward' ) . '</a>';
+			$html .= '</div>';
+		}
 	}
 
 	return $html;

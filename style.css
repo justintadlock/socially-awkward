@@ -430,9 +430,11 @@ body .mejs-embed body {
 	.wp-audio-shortcode.mejs-container {
 		height: 50px !important;
 	}
+	.wp-audio-shortcode .mejs-controls {
+		position: relative !important;
+	}
 	.wp-audio-shortcode .mejs-controls,
 	.wp-video-shortcode .mejs-controls {
-		position: relative !important;
 		box-sizing: border-box;
 		width: 100% !important;
 		height: 50px !important;
@@ -787,6 +789,11 @@ img.size-full {}
 	border-top:    5px solid #000;
 	border-bottom: 5px solid #c0392b;
 }
+
+	.attachment-transcript {
+		max-width: 700px;
+		font-size: 1.25rem;
+	}
 
 /**
  * Content

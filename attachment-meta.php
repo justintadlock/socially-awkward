@@ -50,3 +50,21 @@ $_post = get_queried_object();
 	<?php } // End if check ?>
 
 </div><!-- .attachment-meta -->
+
+
+<?php if ( hybrid_attachment_is_audio() ) { ?>
+
+	<?php $lyrics = socially_awkward_get_audio_transcript(); ?>
+
+	<?php if ( !empty( $lyrics ) ) { ?>
+
+		<div class="attachment-meta">
+		<div class="attachment-transcript">
+			<h3><?php _e( 'Lyrics', 'socially-awkward' ); ?></h3>
+			<?php echo $lyrics; ?>
+		</div>
+		</div>
+
+	<?php } ?>
+
+<?php } ?>
