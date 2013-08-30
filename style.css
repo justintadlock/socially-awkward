@@ -381,6 +381,34 @@ video {
 
 
 /* === WP audio/video player === */
+.audio-image {
+	position: relative;
+	border: none;
+	padding: 0;
+	margin: 0;
+	width: 20%;
+	max-width: 175px;
+	max-height: 131px;
+	border-left: 5px solid #202020;
+	height: auto;
+}
+.audio-shortcode-wrap {
+	position: relative;
+	max-height: 136px;
+	overflow: hidden;
+	margin-bottom: 25px;
+	background: #202020;
+}
+.audio-shortcode-wrap .wp-audio-shortcode {
+	position: absolute !important;
+	top: 50%;
+	margin-top: -25px;
+	left: 20%;
+	clear: none;
+	width: 80% !important;
+}
+.audio-shortcode-wrap .wp-audio-shortcode .mejs-controls {
+}
 
 .media-shortcode-extend .audio-info {
 	border-top: 1px solid #151515;
@@ -391,7 +419,7 @@ video {
 body .mejs-container, 
 body .mejs-embed, 
 body .mejs-embed body {
-	background: #202020;
+	background: transparent;
 }
 
 	.wp-video-shortcode .mejs-controls {
@@ -404,6 +432,7 @@ body .mejs-embed body {
 	}
 	.wp-audio-shortcode .mejs-controls,
 	.wp-video-shortcode .mejs-controls {
+		position: relative !important;
 		box-sizing: border-box;
 		width: 100% !important;
 		height: 50px !important;
@@ -414,6 +443,15 @@ body .mejs-embed body {
 	.wp-video-shortcode .mejs-controls {
 		opacity: 0.85;
 	}
+
+		.wp-audio-shortcode .mejs-mediaelement,
+		.wp-video-shortcode {
+			position: relative;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
 
 		.wp-audio-shortcode .mejs-controls .mejs-button button,
 		.wp-video-shortcode .mejs-controls .mejs-button button {
@@ -426,8 +464,8 @@ body .mejs-embed body {
 			.wp-video-shortcode .mejs-controls .mejs-button button::after {
 				color: #f5f5f5;
 			}
-			.wp-audio-shortcode .mejs-controls .mejs-playpause-button button:hover::after,
-			.wp-video-shortcode .mejs-controls .mejs-playpause-button button:hover::after {
+			.wp-audio-shortcode .mejs-controls .mejs-button button:hover::after,
+			.wp-video-shortcode .mejs-controls .mejs-button button:hover::after {
 				color: #2980b9;
 			}
 			.wp-audio-shortcode .mejs-controls .mejs-play button::after,
@@ -438,22 +476,13 @@ body .mejs-embed body {
 			.wp-video-shortcode .mejs-controls .mejs-pause button::after {
 				content: '\f448';
 			}
-			.wp-audio-shortcode .mejs-controls .mejs-mute button::after,
-			.wp-video-shortcode .mejs-controls .mejs-mute button::after {
+			.wp-audio-shortcode .mejs-controls .mejs-volume-button button::after,
+			.wp-video-shortcode .mejs-controls .mejs-volume-button button::after {
 				content: '\f109';
-			}
-			.wp-audio-shortcode .mejs-controls .mejs-mute button:hover::after,
-			.wp-video-shortcode .mejs-controls .mejs-mute button:hover::after {
-				opacity: 0.25;
 			}
 			.wp-audio-shortcode .mejs-controls .mejs-unmute button::after,
 			.wp-video-shortcode .mejs-controls .mejs-unmute button::after {
-				content: '\f109';
-				opacity: 0.25;
-			}
-			.wp-audio-shortcode .mejs-controls .mejs-unmute button:hover::after,
-			.wp-video-shortcode .mejs-controls .mejs-unmute button:hover::after {
-				opacity: 1;
+				color: #404040;
 			}
 
 		.wp-audio-shortcode .mejs-controls .mejs-time .mejs-currenttime,
@@ -830,14 +859,17 @@ img.size-full {}
 
 			.entry-title a,
 			.entry-byline a,
-			.entry-meta a {
+			.entry-meta a,
+			.comment-meta a {
 				text-decoration: none;
 			}
 				.entry-title a:hover,
 				.entry-byline a:hover,
-				.entry-meta a:hover {
+				.entry-meta a:hover,
+				.comment-meta a:hover {
 					text-decoration: underline;
 				}
+
 			.entry-byline a,
 			.entry-meta a {
 				color: #fff;
@@ -1019,17 +1051,21 @@ img.size-full {}
 	.format-audio {}
 
 
+/* === Post-related icons === */
+
 		.entry-byline .permalink::before, 
 		.entry-meta .permalink::before,
 		.comment-meta .permalink::before,
 		.portfolio-item-link::before {
 			content: '\f107';
+			margin-bottom: 3px;
 			padding-right: 5px;
 			color: #f5f5f5;
 		}
 
 		.comments-link::before {
 			content: '\f300';
+			margin-bottom: 3px;
 			padding-right: 5px;
 			color: #f5f5f5;
 		}
@@ -1039,6 +1075,7 @@ img.size-full {}
 		.entry-byline .portfolio::before,
 		.entry-meta .portfolio::before {
 			content: '\f301';
+			margin-bottom: 3px;
 			padding-right: 5px;
 			color: #f5f5f5;
 		}
@@ -1046,6 +1083,7 @@ img.size-full {}
 		.entry-byline .post_tag::before,
 		.entry-meta .post_tag::before {
 			content: '\f302';
+			margin-bottom: 3px;
 			padding-right: 5px;
 			color: #f5f5f5;
 		}
@@ -1068,6 +1106,7 @@ img.size-full {}
 		.post-edit-link::before,
 		.comment-edit-link::before {
 			content: '\f411';
+			margin-bottom: 3px;
 			padding-right: 5px;
 			color: #f5f5f5;
 		}
@@ -1075,16 +1114,21 @@ img.size-full {}
 		.entry-byline .author a::before,
 		.entry-meta .author a::before {
 			content: '\f304';
+			margin-bottom: 3px;
 			padding-right: 5px;
 			color: #f5f5f5;
 		}
 
 		.published::before {
 			content: '\f307';
+			margin-bottom: 3px;
 			padding-right: 5px;
 			color: #f5f5f5;
 		}
 
+		.post-format-link::before {
+			margin-bottom: 3px;
+		}
 		.post-format-link::before,
 		#menu-formats li a::before {
 			padding-right: 5px;
@@ -1565,6 +1609,7 @@ img.size-full {}
 
 			.comment-reply-link::before {
 				content: '\f412';
+				margin-bottom: 3px;
 				padding-right: 5px;
 				color: #f5f5f5;
 			}
@@ -1635,6 +1680,7 @@ img.size-full {}
 	#respond label[for="url"]::before,
 	#respond label[for="comment"]::before {
 			content: '';
+			margin-bottom: 3px;
 			padding-right: 5px;
 			color: #f5f5f5;
 	}
@@ -1728,13 +1774,14 @@ img.size-full {}
 
 	#menu-social ul {
 		list-style: none;
-		margin:     0 0 25px;
+		margin:     0 0 15px;
 		text-align: center;
 	}
 
 		#menu-social ul li {
 			display:  inline-block;
 			position: relative;
+			margin-bottom: 10px;
 		}
 
 			#menu-social li a::before {
@@ -2092,8 +2139,51 @@ img.size-full {}
 				margin-right: auto;
 			}
 
+	#comments {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }
 
+
+/* === 500px breakpoint === */
+
+@media only screen and (max-width: 500px) {
+
+
+	.image-info ul,
+	.audio-info ul,
+	.video-info ul {
+		list-style: none;
+		text-align: center;
+	}
+	.image-info .data,
+	.audio-info .data,
+	.video-info .data {
+		float: none;
+		display: block;
+		text-align: center;
+	}
+	
+
+	ol.comment-list ol.children {
+		margin-left: 25px;
+	}
+	li.comment .avatar {
+		display: block;
+		float: none;
+		margin: 0 auto 10px auto;
+	}
+	li.comment .comment-meta {
+		text-align: center;
+	}
+	.comment-reply-link {
+		float: none;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
 
 /**
  * Extras

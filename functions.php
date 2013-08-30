@@ -110,7 +110,6 @@ function socially_awkward_theme_setup() {
 	add_filter( 'get_previous_post_join', 'socially_awkward_adjacent_post_join' );
 	add_filter( 'get_next_post_join',     'socially_awkward_adjacent_post_join' );
 
-
 	add_filter( 'shortcode_atts_entry-comments-link', 'socially_awkward_entry_comments_link_atts' );
 
 	add_filter( 'nav_menu_css_class', 'socially_awkward_nav_menu_css_class', 10, 3 );

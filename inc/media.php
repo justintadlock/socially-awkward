@@ -318,6 +318,19 @@ function socially_awkward_audio_shortcode( $html, $atts, $audio, $post_id ) {
 
 	if ( !empty( $attachment_id ) ) {
 
+		$image = get_the_image( 
+			array( 
+				'post_id'      => $attachment_id, 
+				'callback'     => 'socially_awkward_sub_attachment_image', 
+				'image_class'  => 'audio-image',
+				'link_to_post' => is_attachment() ? false : true, 
+				'echo'         => false 
+			) 
+		);
+
+		if ( !empty( $image ) )
+			$html = '<div class="audio-shortcode-wrap">' . $image . $html . '</div>';
+
 		$html .= '<div class="media-shortcode-extend">';
 		$html .= '<div class="audio-info">';
 		$html .= socially_awkward_list_audio_meta( $attachment_id );
@@ -357,5 +370,53 @@ function socially_awkward_video_shortcode( $html, $atts, $video, $post_id ) {
 
 	return $html;
 }
+
+function socially_awkward_sub_attachment_image( $args ) {
+
+	if ( 'attachment' === get_post_type( $args['post_id'] ) && !wp_attachment_is_image( $args['post_id'] ) ) {
+
+		/* Get attachments for the inputted $post_id. */
+		$attachments = get_posts(
+			array(
+				'numberposts'      => 1,
+				'post_parent'      => $args['post_id'],
+				'post_status'      => 'inherit',
+				'post_type'        => 'attachment',
+				'post_mime_type'   => 'image',
+				'order'            => 'ASC',
+				'orderby'          => 'menu_order ID',
+				'suppress_filters' => true,
+				'fields'           => 'ids'
+			)
+		);
+
+		if ( !empty( $attachments ) )
+			$attachment_id = array_shift( $attachments );
+
+	}
+
+	/* Check if we have an attachment ID before proceeding. */
+	if ( !empty( $attachment_id ) ) {
+
+		/* Get the attachment image. */
+		$image = wp_get_attachment_image_src( $attachment_id, $args['size'] );
+
+		/* Get the attachment alt text. */
+		$alt = trim( strip_tags( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) );
+
+		/* Get the attachment caption. */
+		$caption = get_post_field( 'post_excerpt', $attachment_id );
+
+		/* Save the attachment as the 'featured image'. */
+		if ( true === $args['thumbnail_id_save'] )
+			set_post_thumbnail( $args['post_id'], $attachment_id );
+
+		/* Return the image URL. */
+		return array( 'src' => $image[0], 'alt' => $alt, 'caption' => $caption );
+	}
+
+	return false;
+}
+
 
 ?>
