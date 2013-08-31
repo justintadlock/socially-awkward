@@ -60,7 +60,8 @@ th,
 .media-info-toggle, 
 label, 
 input[type="submit"], 
-input[type="reset"] {
+input[type="reset"],
+.mejs-container {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
 	font-style: normal;
@@ -414,174 +415,155 @@ video {
 	border-top: 1px solid #151515;
 }
 
-.wp-audio-shortcode,
-.wp-video-shortcode,
-body .mejs-container, 
-body .mejs-embed, 
-body .mejs-embed body {
+.mejs-container, 
+.mejs-embed, 
+.mejs-embed body {
 	background: transparent;
 }
 
+	.wp-audio-shortcode.mejs-container {
+		height: 50px;
+	}
+
 	.wp-video-shortcode .mejs-controls {
-		border-top: 1px solid #151515;
+		border-top:    1px solid #151515;
 		border-bottom: 1px solid #151515;
 	}
 
-	.wp-audio-shortcode.mejs-container {
-		height: 50px !important;
-	}
-	.wp-audio-shortcode .mejs-controls {
-		position: relative !important;
-	}
-	.wp-audio-shortcode .mejs-controls,
-	.wp-video-shortcode .mejs-controls {
+	.mejs-controls {
 		box-sizing: border-box;
-		width: 100% !important;
-		height: 50px !important;
-		padding: 10px 10px !important;
-		background: #202020 !important;
+		width:      100%;
+		height:     50px;
+		padding:    10px;
+		background: #202020;
 	}
 
-	.wp-video-shortcode .mejs-controls {
-		opacity: 0.85;
-	}
+		.wp-audio-shortcode .mejs-controls {
+			position: relative;
+		}
+
+		.wp-video-shortcode .mejs-controls {
+			opacity: 0.85;
+		}
 
 		.wp-audio-shortcode .mejs-mediaelement,
 		.wp-video-shortcode {
 			position: relative;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
+			top:      0;
+			left:     0;
+			width:    100%;
+			height:   100%;
 		}
 
-		.wp-audio-shortcode .mejs-controls .mejs-button button,
-		.wp-video-shortcode .mejs-controls .mejs-button button {
-			height: 16px;
-			width: 16px;
+		.mejs-button button {
+			height:     16px;
+			width:      16px;
 			background: none;
 		}
 
-			.wp-audio-shortcode .mejs-controls .mejs-button button::after,
-			.wp-video-shortcode .mejs-controls .mejs-button button::after {
+			.mejs-button button:focus {
+				outline: solid 1px #2980b9;
+			}
+
+			.mejs-button button::after {
 				color: #f5f5f5;
 			}
-			.wp-audio-shortcode .mejs-controls .mejs-button button:hover::after,
-			.wp-video-shortcode .mejs-controls .mejs-button button:hover::after {
+
+			.mejs-button button:hover::after,
+			.mejs-volume-button:hover button::after {
 				color: #2980b9;
 			}
-			.wp-audio-shortcode .mejs-controls .mejs-play button::after,
-			.wp-video-shortcode .mejs-controls .mejs-play button::after {
+			.mejs-fullscreen-button button::after {
+				content: '\f422';
+			}
+			.mejs-play button::after {
 				content: '\f452';
 			}
-			.wp-audio-shortcode .mejs-controls .mejs-pause button::after,
-			.wp-video-shortcode .mejs-controls .mejs-pause button::after {
+			.mejs-pause button::after {
 				content: '\f448';
 			}
-			.wp-audio-shortcode .mejs-controls .mejs-volume-button button::after,
-			.wp-video-shortcode .mejs-controls .mejs-volume-button button::after {
+			.mejs-volume-button button::after {
 				content: '\f109';
 			}
-			.wp-audio-shortcode .mejs-controls .mejs-unmute button::after,
-			.wp-video-shortcode .mejs-controls .mejs-unmute button::after {
+			.mejs-unmute button::after {
 				color: #404040;
 			}
 
-		.wp-audio-shortcode .mejs-controls .mejs-time .mejs-currenttime,
-		.wp-audio-shortcode .mejs-controls .mejs-time .mejs-duration,
-		.wp-video-shortcode .mejs-controls .mejs-time .mejs-currenttime,
-		.wp-video-shortcode .mejs-controls .mejs-time .mejs-duration {
-			color: #f5f5f5;
-			font-family: 'Open Sans', sans-serif;
-			font-size: 0.875rem;
-			font-weight: normal;
-			font-style: normal;
+		.mejs-time .mejs-currenttime,
+		.mejs-time .mejs-duration {
+			color:       #f5f5f5;
+			font-size:   0.875rem;
 		}
 
-		.wp-audio-shortcode .mejs-controls .mejs-time-rail .mejs-time-total,
-		.wp-audio-shortcode .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-total,
-		.wp-video-shortcode .mejs-controls .mejs-time-rail .mejs-time-total,
-		.wp-video-shortcode .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-total {
+		.mejs-time-rail .mejs-time-total,
+		.mejs-horizontal-volume-slider .mejs-horizontal-volume-total {
 			background: #404040;
-			border-radius: 0;
 		}
 
-		.wp-audio-shortcode .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current,
-		.wp-audio-shortcode .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-handle,
-		.wp-video-shortcode .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current,
-		.wp-video-shortcode .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-handle {
+		.mejs-horizontal-volume-slider .mejs-horizontal-volume-current,
+		.mejs-horizontal-volume-slider .mejs-horizontal-volume-handle {
 			background: #f5f5f5;
-			border-radius: 0;
 		}
 
-		.wp-audio-shortcode .mejs-controls .mejs-time-rail .mejs-time-loaded,
-		.wp-video-shortcode .mejs-controls .mejs-time-rail .mejs-time-loaded {
+		.mejs-time-rail .mejs-time-loaded {
 			background: #2980b9;
-			border-radius: 0;
 		}
 
-		.wp-audio-shortcode .mejs-controls .mejs-time-rail .mejs-time-current,
-		.wp-video-shortcode .mejs-controls .mejs-time-rail .mejs-time-current {
+		.mejs-time-rail .mejs-time-current {
 			background: #c0392b;
-			border-radius: 0;
 		}
 
-		.wp-video-shortcode .mejs-controls .mejs-volume-button .mejs-volume-slider {
-			width: 40px;
+		.mejs-volume-button .mejs-volume-slider {
+			width:       40px;
 			margin-left: -10px;
-			background: #202020;
+			background:  #202020;
 		}
-		.wp-video-shortcode .mejs-controls .mejs-volume-button .mejs-volume-slider .mejs-volume-total,
-		.wp-video-shortcode .mejs-controls .mejs-volume-button .mejs-volume-slider .mejs-volume-current {
-			position: absolute;
-			top: 10px;
-			left: 50%;
-			width: 4px;
-			margin: 0 0 0 -2px;
+
+		.mejs-volume-button .mejs-volume-slider .mejs-volume-total,
+		.mejs-volume-button .mejs-volume-slider .mejs-volume-current {
+			top:      10px;
+			left:     50%;
+			width:    4px;
+			margin:   0 0 0 -2px;
 		}
-		.wp-video-shortcode .mejs-controls .mejs-volume-button .mejs-volume-slider .mejs-volume-handle {
-			position: absolute;
-			left: 50%;
-			width: 20px;
-			height: 4px;
-			margin: 0 0 0 -10px;
+		.mejs-volume-button .mejs-volume-slider .mejs-volume-handle {
+			left:     50%;
+			width:    20px;
+			height:   4px;
+			margin:   0 0 0 -10px;
 		}
-		.wp-video-shortcode .mejs-controls .mejs-volume-button .mejs-volume-slider .mejs-volume-total {
+		.mejs-volume-button .mejs-volume-slider .mejs-volume-total {
 			background: #404040;
-			border-radius: 0;
 		}
-		.wp-video-shortcode .mejs-controls .mejs-volume-button .mejs-volume-slider .mejs-volume-current,
-		.wp-video-shortcode .mejs-controls .mejs-volume-button .mejs-volume-slider .mejs-volume-handle {
+		.mejs-volume-button .mejs-volume-slider .mejs-volume-current,
+		.mejs-volume-button .mejs-volume-slider .mejs-volume-handle {
 			color: #f5f5f5;
-			border-radius: 0;
 		}
 
-		.wp-video-shortcode .mejs-overlay-button {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			width: 112px;
-			height: 112px;
-			margin: -56px 0 0 -56px;
-			background: none;
+		.mejs-overlay-button {
+			width:      112px;
+			height:     112px;
+			margin:     -56px 0 0 -56px;
+			background: transparent;
 		}
 
-			.wp-video-shortcode .mejs-overlay-button::after {
-				content: '\f452';
-				padding: 18px;
-				font-size: 64px;
-				line-height: 64px;
-				color: #f5f5f5;
-				background: #292929;
-				border: 10px solid #202020;
+			.mejs-overlay-play .mejs-overlay-button::after {
+				content:       '\f452';
+				padding:       18px;
+				font-size:     64px;
+				line-height:   64px;
+				color:         #f5f5f5;
+				background:    #292929;
+				border:        10px solid #202020;
 				border-radius: 50%;
-				opacity: 0.85;
+				opacity:       0.85;
 			}
 
-				.wp-video-shortcode .mejs-overlay-button:hover::after {
+				.mejs-overlay-play .mejs-overlay-button:hover::after {
 					opacity: 0.9;
-					color: #fff;
+					color:   #fff;
 				}
+
 
 /* === Forms === */
 

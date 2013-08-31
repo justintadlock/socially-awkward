@@ -59,7 +59,10 @@ function socially_awkward_theme_setup() {
 	add_theme_support( 'hybrid-core-scripts', array( 'comment-reply', 'mobile-toggle' ) );
 
 	/* Load styles. */
-	add_theme_support( 'hybrid-core-styles', array( 'one-five', 'gallery', 'parent', 'style' ) );
+	add_theme_support( 
+		'hybrid-core-styles', 
+		array( 'one-five', 'socially-awkward-mediaelement', 'gallery', 'parent', 'style' ) 
+	);
 
 	/* Load shortcodes. */
 	add_theme_support( 'hybrid-core-shortcodes' );
@@ -103,6 +106,9 @@ function socially_awkward_theme_setup() {
 	/* Register custom nav menus. */
 	add_action( 'init', 'socially_awkward_register_nav_menus', 11 );
 
+	/* Load custom styles. */
+	add_filter( "{$prefix}_styles", 'socially_awkward_styles' );
+
 	/* Load custom scripts. */
 	add_action( 'wp_enqueue_scripts', 'socially_awkward_enqueue_scripts' );
 
@@ -112,7 +118,25 @@ function socially_awkward_theme_setup() {
 
 	add_filter( 'shortcode_atts_entry-comments-link', 'socially_awkward_entry_comments_link_atts' );
 
+	add_action( 'wp_enqueue_scripts', 'socially_awkward_deregister_styles' );
+
 	add_filter( 'nav_menu_css_class', 'socially_awkward_nav_menu_css_class', 10, 3 );
+}
+
+function socially_awkward_deregister_styles() {
+	wp_deregister_style( 'mediaelement' );
+	wp_deregister_style( 'wp-mediaelement' );
+}
+
+
+function socially_awkward_styles( $styles ) {
+
+	$styles['socially-awkward-mediaelement'] = array(
+		'version' => '20130830',
+		'src'     => trailingslashit( get_template_directory_uri() ) . 'css/theme-mediaelement/mediaelement.css'
+	);
+
+	return $styles;
 }
 
 function socially_awkward_entry_comments_link_atts( $out ) {
