@@ -564,7 +564,7 @@ video {
 
 				.mejs-overlay-play .mejs-overlay-button:hover::after {
 					opacity: 1;
-					color:   #fff;
+					color:   #2980b9;
 				}
 
 
