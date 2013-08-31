@@ -553,14 +553,17 @@ video {
 				font-size:     64px;
 				line-height:   64px;
 				color:         #f5f5f5;
-				background:    #292929;
+				text-shadow:   1px 1px 2px #292929;
+				background:    #292929; /* fallback */
+				background:    rgba( 41, 41, 41, 0.75 );
 				border:        10px solid #202020;
+				border-color:  rgba( 32, 32, 32, 0.5 );
 				border-radius: 50%;
 				opacity:       0.85;
 			}
 
 				.mejs-overlay-play .mejs-overlay-button:hover::after {
-					opacity: 0.9;
+					opacity: 1;
 					color:   #fff;
 				}
 
