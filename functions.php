@@ -133,7 +133,7 @@ function socially_awkward_styles( $styles ) {
 
 	$styles['socially-awkward-mediaelement'] = array(
 		'version' => '20130830',
-		'src'     => trailingslashit( get_template_directory_uri() ) . 'css/theme-mediaelement/mediaelement.css'
+		'src'     => trailingslashit( get_template_directory_uri() ) . 'css/theme-mediaelement/mediaelement.min.css'
 	);
 
 	return $styles;
