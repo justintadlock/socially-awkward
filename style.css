@@ -775,11 +775,6 @@ img.size-full {}
 	border-bottom: 5px solid #c0392b;
 }
 
-	.attachment-transcript {
-		max-width: 700px;
-		font-size: 1.25rem;
-	}
-
 /**
  * Content
  * --------------------------------------------------------------------------- */
@@ -1299,6 +1294,12 @@ img.size-full {}
 		width: 47.5%;
 	}
 
+	.attachment-meta .audio-info,
+	.attachment-meta .video-info {
+		max-width: 700px;
+		margin: 0 auto;
+	}
+
 		.image-info ul,
 		.video-info ul,
 		.audio-info ul {
@@ -1326,6 +1327,12 @@ img.size-full {}
 					float:      right;
 					font-size:  1rem;
 				}
+
+	.attachment-transcript {
+		max-width: 700px;
+		margin:    0 auto;
+		font-size: 1.25rem;
+	}
 
 /* ====== Audio/Video shortcode toggle ====== */
 
