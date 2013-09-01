@@ -191,6 +191,18 @@ blockquote {
 		opacity:    0.75;
 	}
 
+	q {
+		quotes: '\201C' '\201D';
+	}
+
+		q::before {
+			content: open-quote;
+		}
+
+		q::after { 
+			content: close-quote; 
+		}
+
 /* === Acronyms and abbreviations === */
 
 acronym {}
@@ -834,7 +846,9 @@ img.size-full {}
 		padding-top: 50px;
 	}
 
-.sticky {}
+.sticky {
+	background: url( 'images/bg-dark-blue.jpg' );
+}
 
 	.entry-header,
 	.entry-content,
