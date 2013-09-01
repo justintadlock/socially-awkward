@@ -567,6 +567,24 @@ video {
 					color:   #2980b9;
 				}
 
+		.mejs-time-rail .mejs-time-float {
+			top:         -38px;
+			height:      27px;
+			width:       50px;
+			margin-left: -25px;
+			color:       #f5f5f5;
+			background:  #202020;
+			border:      1px solid #404040;
+		}
+		.mejs-time-rail .mejs-time-float-current {
+			margin:    8px 9px;
+			font-size: 0.8125rem;
+		}
+		.mejs-time-rail .mejs-time-float-corner {
+			top:              27px;
+			left:             20px;
+			border-top-color: #f5f5f5;
+		}
 
 /* === Forms === */
 
