@@ -147,7 +147,7 @@ final class Socially_Awkward_Get_Image {
 			}
 		}
 
-		if ( preg_match( '#((?:<a [^>]+>\s*)?<img [^>]+>(?:\s*</a>)?)(.*)#is', $post_content, $matches ) )
+		if ( preg_match( '#((?:<a [^>]+>\s*)?<img [^>]+>(?:\s*</a>)?)#is', $post_content, $matches ) )
 			return $this->original_image = $matches[0];
 
 		return get_the_image( array( 'size' => 'full', 'image_class' => 'aligncenter', 'echo' => false ) );
