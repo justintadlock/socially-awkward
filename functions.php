@@ -151,8 +151,8 @@ function socially_awkward_deregister_styles() {
 function socially_awkward_styles( $styles ) {
 
 	$styles['socially-awkward-mediaelement'] = array(
-		'version' => '20130830',
-		'src'     => trailingslashit( get_template_directory_uri() ) . 'css/theme-mediaelement/mediaelement.min.css'
+		'version' => '20130830.1',
+		'src'     => trailingslashit( get_template_directory_uri() ) . 'css/mediaelement/mediaelement.min.css'
 	);
 
 	return $styles;
