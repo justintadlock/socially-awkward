@@ -3,7 +3,7 @@
  * Theme URI: http://themehybrid.com/themes/socially-awkward
  * Description: <strong>Note:</strong> <em>This is a beta version of the theme, which means it could have some issues. Use on a live site at your own risk.</em>  A responsive CSS3 and HTML5 social media theme.  The Web is an ever-changing place to interact with others socially.  You need a theme that represents who you are on the Web.  The theme is fully loaded to display self-hosted media (images, audio, video) and media from third-party social media sites.  It integrates with many of your social networking profiles, supports all post formats, and integrates with the <a href="http://wordpress.org/extend/plugins/custom-content-portfolio">Custom Content Portfolio</a> plugin, giving you the ability to share your creativity with the world.
  * Tags: example
- * Version: 0.1.0-beta-1
+ * Version: 0.1.0-beta-2
  * Author: Justin Tadlock
  * Author URI: http://justintadlock.com
  */
@@ -446,7 +446,7 @@ video {
 }
 
 	.wp-audio-shortcode.mejs-container {
-		height: 50px;
+		min-height: 50px !important;
 	}
 
 	.wp-video-shortcode .mejs-controls {
@@ -458,14 +458,10 @@ video {
 			-moz-box-sizing: border-box;
 		box-sizing: border-box;
 		width:      100%;
-		height:     50px;
+		height:     100%;
 		padding:    10px;
 		background: #202020;
 	}
-
-		.audio-shortcode-wrap .wp-audio-shortcode .mejs-controls {
-			position: relative;
-		}
 
 		.wp-video-shortcode .mejs-controls {
 			opacity: 0.85;
