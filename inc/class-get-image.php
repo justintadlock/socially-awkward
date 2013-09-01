@@ -1,4 +1,14 @@
 <?php
+/**
+ * Socially Awkward Get Image - Class for pulling images out of the post content.
+ *
+ * Some concepts that I hope to push to the Get the Image script in a future version.  This is a test 
+ * run of sorts on how to better pull images in various contexts (basic image, linked image, captioned 
+ * image, etc.) out of the post content.
+ *
+ * @package    SociallyAwkward
+ * @since      0.1.0
+ */
 
 /**
  * Wrapper function for the Socially_Awkward_Get_Image class.
@@ -140,7 +150,6 @@ final class Socially_Awkward_Get_Image {
 		if ( preg_match( '#((?:<a [^>]+>\s*)?<img [^>]+>(?:\s*</a>)?)(.*)#is', $post_content, $matches ) )
 			return $this->original_image = $matches[0];
 
-
 		return get_the_image( array( 'size' => 'full', 'image_class' => 'aligncenter', 'echo' => false ) );
 	}
 
@@ -159,12 +168,5 @@ final class Socially_Awkward_Get_Image {
 		return str_replace( $this->original_image, '', $content );
 	}
 }
-
-
-
-
-
-
-
 
 ?>

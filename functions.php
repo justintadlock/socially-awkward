@@ -45,6 +45,7 @@ add_action( 'after_setup_theme', 'socially_awkward_theme_setup' );
  */
 function socially_awkward_theme_setup() {
 
+	/* Load includes. */
 	require_once( trailingslashit( get_template_directory() ) . 'inc/hybrid-core-x.php' );
 	require_once( trailingslashit( get_template_directory() ) . 'inc/media.php' );
 	require_once( trailingslashit( get_template_directory() ) . 'inc/class-get-image.php' );
@@ -106,6 +107,12 @@ function socially_awkward_theme_setup() {
 	/* Register custom nav menus. */
 	add_action( 'init', 'socially_awkward_register_nav_menus', 11 );
 
+	/* Add custom nav menu item classes. */
+	add_filter( 'nav_menu_css_class', 'socially_awkward_nav_menu_css_class', 10, 3 );
+
+	/* De-register stylesheets. */
+	add_action( 'wp_enqueue_scripts', 'socially_awkward_deregister_styles' );
+
 	/* Load custom styles. */
 	add_filter( "{$prefix}_styles", 'socially_awkward_styles' );
 
@@ -116,19 +123,31 @@ function socially_awkward_theme_setup() {
 	add_filter( 'get_previous_post_join', 'socially_awkward_adjacent_post_join' );
 	add_filter( 'get_next_post_join',     'socially_awkward_adjacent_post_join' );
 
+	/* Change the comments number output. */
 	add_filter( 'shortcode_atts_entry-comments-link', 'socially_awkward_entry_comments_link_atts' );
-
-	add_action( 'wp_enqueue_scripts', 'socially_awkward_deregister_styles' );
-
-	add_filter( 'nav_menu_css_class', 'socially_awkward_nav_menu_css_class', 10, 3 );
 }
 
+/**
+ * Removes the WordPress mediaelement styles on the front end.  We're rolling our own.
+ *
+ * @since  0.1.0
+ * @access public
+ * @return void
+ */
 function socially_awkward_deregister_styles() {
 	wp_deregister_style( 'mediaelement' );
 	wp_deregister_style( 'wp-mediaelement' );
 }
 
-
+/**
+ * Adds a custom stylesheet to the Hybrid styles loader.  We need to do this so that it's loaded in the correct 
+ * order (before the theme style).
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  array  $styles
+ * @return array
+ */
 function socially_awkward_styles( $styles ) {
 
 	$styles['socially-awkward-mediaelement'] = array(
@@ -139,15 +158,50 @@ function socially_awkward_styles( $styles ) {
 	return $styles;
 }
 
+/**
+ * Loads scripts needed by the theme.
+ *
+ * @since  0.1.0
+ * @access public
+ * @return void
+ */
+function socially_awkward_enqueue_scripts() {
+
+	wp_enqueue_script( 
+		'socially-awkward', 
+		hybrid_locate_theme_file( array( 'js/socially-awkward.js' ) ), 
+		array( 'jquery' ),
+		'20130812',
+		true
+	);
+}
+
+/**
+ * Changes the post comments link number to "(%s)".
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  array  $out
+ * @return array
+ */
 function socially_awkward_entry_comments_link_atts( $out ) {
 
-	$out['zero'] = _x( '(0)', 'comments number', 'socially-awkward' );
+	$out['zero'] = _x( '(0)',  'comments number', 'socially-awkward' );
 	$out['one']  = _x( '(%s)', 'comments number', 'socially-awkward' );
 	$out['more'] = _x( '(%s)', 'comments number', 'socially-awkward' );
 
 	return $out;
 }
 
+/**
+ * Adds custom nav menu item classes.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  array   $classes
+ * @param  object  $item
+ * @param  object  $args
+ */
 function socially_awkward_nav_menu_css_class( $classes, $item, $args ) {
 
 	if ( 'formats' === $args->theme_location && 'taxonomy' === $item->type && 'post_format' === $item->object )
@@ -179,48 +233,32 @@ function socially_awkward_register_image_sizes() {
  * @return void
  */
 function socially_awkward_register_nav_menus() {
-	register_nav_menu( 'social', __( 'Social', 'socially-awkward' ) );
 
-	register_nav_menu( 'formats', __( 'Formats', 'socially-awkward' ) );
+	register_nav_menu( 'social', esc_html__( 'Social', 'socially-awkward' ) );
+
+	register_nav_menu( 'formats', esc_html__( 'Formats', 'socially-awkward' ) );
 
 	if ( post_type_exists( 'portfolio_item' ) )
 		register_nav_menu( 'portfolio', esc_html__( 'Portfolio', 'socially-awkward' ) );
 }
 
-function socially_awkward_get_blog_url() {
-	$blog_url = '';
-
-	$show_on_front  = get_option( 'show_on_front' );
-
-	if ( 'posts' == $show_on_front ) {
-		$blog_url = home_url();
-
-	} else {
-		$page_for_posts = get_option( 'page_for_posts' );
-
-		if ( 0 < $page_for_posts )
-			$blog_url = get_permalink( $page_for_posts );
-	}
-
-	return $blog_url;
-}
-
 /**
- * Loads scripts needed by the theme.
+ * Gets the "blog" (posts page) page URL.  WordPress could really use this function.
  *
  * @since  0.1.0
  * @access public
- * @return void
+ * @return string
  */
-function socially_awkward_enqueue_scripts() {
+function socially_awkward_get_blog_url() {
+	$blog_url = '';
 
-	wp_enqueue_script( 
-		hybrid_get_prefix(), 
-		hybrid_locate_theme_file( array( 'js/socially-awkward.js' ) ), 
-		array( 'jquery' ),
-		'20130812',
-		true
-	);
+	if ( 'posts' === get_option( 'show_on_front' ) )
+		$blog_url = home_url();
+
+	elseif ( 0 < ( $page_for_posts = get_option( 'page_for_posts' ) ) )
+		$blog_url = get_permalink( $page_for_posts );
+
+	return $blog_url;
 }
 
 /**
@@ -332,10 +370,5 @@ function socially_awkward_adjacent_post_join( $join ) {
 	}
 
 /* End CPT: Portfolio section. */
-
-
-
-
-
 
 ?>

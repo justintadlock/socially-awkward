@@ -1,13 +1,19 @@
 <?php
+/**
+ * Functions and filters for handling media in the theme.
+ *
+ * @package SociallyAwkward
+ * @since   0.1.0
+ */
 
+/* Filters the [audio] shortcode. */
+add_filter( 'wp_audio_shortcode', 'socially_awkward_audio_shortcode', 10, 3 );
 
-add_filter( 'wp_audio_shortcode', 'socially_awkward_audio_shortcode', 10, 4 );
-add_filter( 'wp_video_shortcode', 'socially_awkward_video_shortcode', 10, 4 );
-
-
+/* Filters the [video] shortcode. */
+add_filter( 'wp_video_shortcode', 'socially_awkward_video_shortcode', 10, 3 );
 
 /**
- * Retrieves an attachment ID based on a URL.
+ * Retrieves an attachment ID based on an attachment file URL.
  *
  * @copyright Pippin Williamson
  * @license   http://www.gnu.org/licenses/gpl-2.0.html
@@ -106,7 +112,15 @@ function socially_awkward_get_image_size_links() {
 	return join( ' <span class="sep">/</span> ', $links );
 }
 
-function socially_awkward_get_image_meta() {
+/**
+ * Gets metadata associated with a specific image attachment.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  int    $post_id
+ * @return array
+ */
+function socially_awkward_get_image_meta( $post_id = 0 ) {
 
 	if ( empty( $post_id ) )
 		$post_id = get_the_ID();
@@ -165,9 +179,14 @@ function socially_awkward_get_image_meta() {
 	return apply_filters( hybrid_get_prefix() . '_attachment_image_meta', $items );
 }
 
-
-
-
+/**
+ * Gets metadata associated with a specific audio attachment.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  int    $post_id
+ * @return array
+ */
 function socially_awkward_get_audio_meta( $post_id = 0 ) {
 
 	if ( empty( $post_id ) )
@@ -177,44 +196,60 @@ function socially_awkward_get_audio_meta( $post_id = 0 ) {
 	$meta = wp_get_attachment_metadata( $post_id );
 	$items = array();
 
-	//var_dump( $meta );
-
+	/* Formated length of time the audio file runs. */
 	if ( !empty( $meta['length_formatted'] ) )
 		$items['length_formatted'] = array( $meta['length_formatted'], __( 'Run Time', 'socially-awkward' ) );
 
+	/* Artist. */
 	if ( !empty( $meta['artist'] ) )
 		$items['artist'] = array( $meta['artist'], __( 'Artist', 'socially-awkward' ) );
 
+	/* Composer. */
 	if ( !empty( $meta['composer'] ) )
 		$items['composer'] = array( $meta['composer'], __( 'Composer', 'socially-awkward' ) );
 
+	/* Album. */
 	if ( !empty( $meta['album'] ) )
 		$items['album'] = array( $meta['album'], __( 'Album', 'socially-awkward' ) );
 
+	/* Track number (should also be an album if this is set). */
 	if ( !empty( $meta['track_number'] ) )
 		$items['track_number'] = array( $meta['track_number'], __( 'Track', 'socially-awkward' ) );
 
+	/* Year. */
 	if ( !empty( $meta['year'] ) )
 		$items['year'] = array( $meta['year'], __( 'Year', 'socially-awkward' ) );
 
+	/* Genre. */
 	if ( !empty( $meta['genre'] ) )
 		$items['genre'] = array( $meta['genre'], __( 'Genre', 'socially-awkward' ) );
 
+	/* File name.  We're linking this to the actual file URL. */
 	$items['file_name'] = array( '<a href="' . esc_url( wp_get_attachment_url( $post_id ) ) . '">' . basename( get_attached_file( $post_id ) ) . '</a>', __( 'File Name', 'socially-awkward' ) );
 
+	/* File size. */
 	if ( !empty( $meta['filesize'] ) )
 		$items['filesize'] = array( socially_awkward_format_file_size( $meta['filesize'] ), __( 'File Size', 'socially-awkward' ) );
 
+	/* File type (the metadata for this can be off, so we're just looking at the actual file). */
 	if ( preg_match( '/^.*?\.(\w+)$/', get_attached_file( $post_id ), $matches ) )
 		$items['file_type'] = array( esc_html( strtoupper( $matches[1] ) ), __( 'File Type', 'socially-awkward' ) );
 
+	/* Mime type. */
 	if ( !empty( $meta['mime_type'] ) )
 		$items['mime_type'] = array( $meta['mime_type'], __( 'Mime Type', 'socially-awkward' ) );
 
 	return apply_filters( hybrid_get_prefix() . '_attachment_audio_meta', $items );
 }
 
-
+/**
+ * Gets metadata associated with a specific video attachment.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  int    $post_id
+ * @return array
+ */
 function socially_awkward_get_video_meta( $post_id = 0 ) {
 
 	if ( empty( $post_id ) )
@@ -224,32 +259,34 @@ function socially_awkward_get_video_meta( $post_id = 0 ) {
 	$meta = wp_get_attachment_metadata( $post_id );
 	$items = array();
 
+	/* Formated length of time the video file runs. */
 	if ( !empty( $meta['length_formatted'] ) )
 		$items['length_formatted'] = array( $meta['length_formatted'], __( 'Run Time', 'socially-awkward' ) );
 
+	/* Dimensions (width x height in pixels). */
 	if ( !empty( $meta['width'] ) && !empty( $meta['height'] ) )
 		$items['dimensions'] = array( sprintf( __( '%1$s &#215; %2$s pixels', 'socially-awkward' ), $meta['width'], $meta['height'] ), __( 'Dimensions', 'socially-awkward' ) );
 
+	/* File name.  We're linking this to the actual file URL. */
 	$items['file_name'] = array( '<a href="' . esc_url( wp_get_attachment_url( $post_id ) ) . '">' . basename( get_attached_file( $post_id ) ) . '</a>', __( 'File Name', 'socially-awkward' ) );
 
+	/* File size. */
 	if ( !empty( $meta['filesize'] ) )
 		$items['filesize'] = array( socially_awkward_format_file_size( $meta['filesize'] ), __( 'File Size', 'socially-awkward' ) );
 
+	/* File type (the metadata for this can be off, so we're just looking at the actual file). */
 	if ( preg_match( '/^.*?\.(\w+)$/', get_attached_file( $post_id ), $matches ) )
 		$items['file_type'] = array( esc_html( strtoupper( $matches[1] ) ), __( 'File Type', 'socially-awkward' ) );
 
+	/* Mime type. */
 	if ( !empty( $meta['mime_type'] ) )
 		$items['mime_type'] = array( $meta['mime_type'], __( 'Mime Type', 'socially-awkward' ) );
 
 	return apply_filters( hybrid_get_prefix() . '_attachment_video_meta', $items );
 }
 
-
-
-
-
 /**
- * Formats media meta items into an unordered list.
+ * Formats media meta items into an unordered list. 
  *
  * @since  0.1.0
  * @access public
@@ -265,6 +302,14 @@ function socially_awkward_list_media_meta( $items ) {
 	return '<ul class="media-meta">' . $list . '</ul>';
 }
 
+/**
+ * Formats image meta items into an unordered list.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  int     $post_id
+ * @return string
+ */
 function socially_awkward_list_image_meta( $post_id = 0 ) {
 
 	$list     = '';
@@ -277,6 +322,14 @@ function socially_awkward_list_image_meta( $post_id = 0 ) {
 	return socially_awkward_list_media_meta( array_merge( $defaults, $items ) );
 }
 
+/**
+ * Formats audio meta items into an unordered list.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  int     $post_id
+ * @return string
+ */
 function socially_awkward_list_audio_meta( $post_id = 0 ) {
 
 	$list     = '';
@@ -289,6 +342,14 @@ function socially_awkward_list_audio_meta( $post_id = 0 ) {
 	return socially_awkward_list_media_meta( array_merge( $defaults, $items ) );
 }
 
+/**
+ * Formats video meta items into an unordered list.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  int     $post_id
+ * @return string
+ */
 function socially_awkward_list_video_meta( $post_id = 0 ) {
 
 	$defaults = array();
@@ -300,8 +361,15 @@ function socially_awkward_list_video_meta( $post_id = 0 ) {
 	return socially_awkward_list_media_meta( array_merge( $defaults, $items ) );
 }
 
-/**************/
-
+/**
+ * Gets the "transcript" for an audio attachment.  This is typically saved as "unsynchronised_lyric", which is 
+ * the ID3 tag sanitized by WordPress.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  int     $post_id
+ * @return string
+ */
 function socially_awkward_get_audio_transcript( $post_id = 0 ) {
 
 	if ( empty( $post_id ) )
@@ -325,26 +393,40 @@ function socially_awkward_get_audio_transcript( $post_id = 0 ) {
 	return '';
 }
 
+/**
+ * Adds a featured image (if one exists) next to the audio player.  Also adds a section below the player to 
+ * display the audio file information (toggled by custom JS).
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  string  $html
+ * @param  array   $atts
+ * @param  object  $audio
+ * @return string
+ */
+function socially_awkward_audio_shortcode( $html, $atts, $audio ) {
 
-/**************/
-
-function socially_awkward_audio_shortcode( $html, $atts, $audio, $post_id ) {
-
-	/* Don't show on single attachment pages. */
+	/* Don't show in the admin. */
 	if ( is_admin() )
 		return $html;
 
+	/* If we have an actual attachment to work with, use the ID. */
 	if ( is_object( $audio ) ) {
 		$attachment_id = $audio->ID;
-	} else {
+	}
+
+	/* Else, get the ID via the file URL. */
+	else {
 		preg_match( '/src=[\'"](.+?)[\'"]/i', $html, $matches );
 
 		if ( !empty( $matches ) )
 			$attachment_id = socially_awkward_get_attachment_id_from_url( $matches[1] );
 	}
 
+	/* If an attachment ID was found. */
 	if ( !empty( $attachment_id ) ) {
 
+		/* Get the attachment's featured image. */
 		$image = get_the_image( 
 			array( 
 				'post_id'      => $attachment_id, 
@@ -355,9 +437,11 @@ function socially_awkward_audio_shortcode( $html, $atts, $audio, $post_id ) {
 			) 
 		);
 
+		/* Add a wrapper for the audio element and image. */
 		if ( !empty( $image ) )
 			$html = '<div class="audio-shortcode-wrap">' . $image . $html . '</div>';
 
+		/* If not viewing an attachment page, add the media info section. */
 		if ( !is_attachment() ) {
 			$html .= '<div class="media-shortcode-extend">';
 			$html .= '<div class="audio-info">';
@@ -371,22 +455,36 @@ function socially_awkward_audio_shortcode( $html, $atts, $audio, $post_id ) {
 	return $html;
 }
 
+/**
+ * Adds a section below the player to  display the video file information (toggled by custom JS).
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  string  $html
+ * @param  array   $atts
+ * @param  object  $audio
+ * @return string
+ */
+function socially_awkward_video_shortcode( $html, $atts, $video ) {
 
-function socially_awkward_video_shortcode( $html, $atts, $video, $post_id ) {
-
-	/* Don't show on single attachment pages. */
+	/* Don't show on single attachment pages or in the admin. */
 	if ( is_attachment() || is_admin() )
 		return $html;
 
+	/* If we have an actual attachment to work with, use the ID. */
 	if ( is_object( $video ) ) {
 		$attachment_id = $video->ID;
-	} else {
+	}
+
+	/* Else, get the ID via the file URL. */
+	else {
 		preg_match( '/src=[\'"](.+?)[\'"]/i', $html, $matches );
 
 		if ( !empty( $matches ) )
 			$attachment_id = socially_awkward_get_attachment_id_from_url( $matches[1] );
 	}
 
+	/* If an attachment ID was found, add the media info section. */
 	if ( !empty( $attachment_id ) ) {
 
 		$html .= '<div class="media-shortcode-extend">';
@@ -400,6 +498,16 @@ function socially_awkward_video_shortcode( $html, $atts, $video, $post_id ) {
 	return $html;
 }
 
+/**
+ * Callback function for get_the_image(), which allows it to find sub-attachment images (i.e., attachment of 
+ * an attachment).  This will be rolled into a future version of the Get the Image script and will likely 
+ * be removed from this theme.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  array       $args
+ * @return array|bool
+ */
 function socially_awkward_sub_attachment_image( $args ) {
 
 	if ( 'attachment' === get_post_type( $args['post_id'] ) && !wp_attachment_is_image( $args['post_id'] ) ) {
@@ -421,7 +529,6 @@ function socially_awkward_sub_attachment_image( $args ) {
 
 		if ( !empty( $attachments ) )
 			$attachment_id = array_shift( $attachments );
-
 	}
 
 	/* Check if we have an attachment ID before proceeding. */
@@ -446,6 +553,5 @@ function socially_awkward_sub_attachment_image( $args ) {
 
 	return false;
 }
-
 
 ?>
