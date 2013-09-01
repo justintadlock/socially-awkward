@@ -438,7 +438,7 @@ video {
 		background: #202020;
 	}
 
-		.wp-audio-shortcode .mejs-controls {
+		.audio-shortcode-wrap .wp-audio-shortcode .mejs-controls {
 			position: relative;
 		}
 
