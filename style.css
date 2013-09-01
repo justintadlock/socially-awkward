@@ -826,37 +826,26 @@ img.size-full {}
 
 .hentry {}
 
-	.format-video,
-	.format-audio,
-	.format-gallery,
-	.format-image,
-	.singular-attachment.attachment-image .hentry,
-	.singular-attachment.attachment-audio .hentry,
-	.singular-attachment.attachment-video .hentry,
-	.portfolio_item {
-		padding-top: 0;
-	}
 
 		/* Adjust for border at top of post container. */
-		.format-gallery > .wp-caption,
-		.format-gallery > img,
-		.format-gallery > a img,
-		.format-image > .wp-caption,
-		.format-image > img,
-		.format-image > a img,
-		.singular-attachment.attachment-image .hentry > .wp-caption,
-		.singular-attachment.attachment-image .hentry > img,
-		.singular-attachment.attachment-image .hentry > a img,
-		.portfolio_item > .wp-caption,
-		.portfolio_item > img,
-		.portfolio_item > a img {
+		.hentry > .wp-caption,
+		.hentry > img,
+		.hentry > a img {
 			display: block;
-			margin: -5px auto 25px;
+			margin: -55px auto 25px;
 		}
 
-	.singular .format-gallery {
-		padding-top: 50px;
-	}
+		.hentry > .mejs-container,
+		.hentry > div[style*="max-width"],
+		.hentry > .embed-wrap,
+		.hentry > .audio-shortcode-wrap,
+		.hentry > video,
+		.hentry > audio,
+		.hentry > iframe,
+		.hentry > embed,
+		.hentry > object {
+			margin-top: -50px;
+		}
 
 .sticky {
 	background: url( 'images/bg-dark-blue.jpg' );
