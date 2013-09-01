@@ -458,7 +458,7 @@ video {
 			-moz-box-sizing: border-box;
 		box-sizing: border-box;
 		width:      100%;
-		height:     100%;
+		height:     50px;
 		padding:    10px;
 		background: #202020;
 	}
