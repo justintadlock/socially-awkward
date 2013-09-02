@@ -7,10 +7,13 @@
  */
 
 /* Filters the [audio] shortcode. */
-add_filter( 'wp_audio_shortcode', 'socially_awkward_audio_shortcode', 10, 3 );
+add_filter( 'wp_audio_shortcode', 'socially_awkward_audio_shortcode', 10, 4 );
 
 /* Filters the [video] shortcode. */
 add_filter( 'wp_video_shortcode', 'socially_awkward_video_shortcode', 10, 3 );
+
+/* Filter the [video] shortcode attributes. */
+add_filter( 'shortcode_atts_video', 'socially_awkward_video_atts' );
 
 /**
  * Retrieves an attachment ID based on an attachment file URL.
@@ -402,9 +405,10 @@ function socially_awkward_get_audio_transcript( $post_id = 0 ) {
  * @param  string  $html
  * @param  array   $atts
  * @param  object  $audio
+ * @param  object  $post_id
  * @return string
  */
-function socially_awkward_audio_shortcode( $html, $atts, $audio ) {
+function socially_awkward_audio_shortcode( $html, $atts, $audio, $post_id ) {
 
 	/* Don't show in the admin. */
 	if ( is_admin() )
@@ -436,6 +440,10 @@ function socially_awkward_audio_shortcode( $html, $atts, $audio ) {
 				'echo'         => false 
 			) 
 		);
+
+		/* If there's no attachment featured image, see if there's one for the post. */
+		if ( empty( $image ) && !empty( $post_id ) )
+			$image = get_the_image( array( 'image_class' => 'audio-image', 'link_to_post' => false, 'echo' => false ) );
 
 		/* Add a wrapper for the audio element and image. */
 		if ( !empty( $image ) )
@@ -496,6 +504,72 @@ function socially_awkward_video_shortcode( $html, $atts, $video ) {
 	}
 
 	return $html;
+}
+
+/**
+ * Featured image for self-hosted videos.  Checks the vidoe attachment for sub-attachment images.  If 
+ * none exist, checks the current post (if in The Loop) for its featured image.  If an image is found, 
+ * it's used as the "poster" attribute in the [video] shortcode.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  array  $out
+ * @return array
+ */
+function socially_awkward_video_atts( $out ) {
+
+	/* Don't show in the admin. */
+	if ( is_admin() )
+		return $out;
+
+	/* Only run if the user didn't set a 'poster' image. */
+	if ( empty( $out['poster'] ) ) {
+
+		/* Check the 'src' attribute for an attachment file. */
+		if ( !empty( $out['src'] ) )
+			$attachment_id = socially_awkward_get_attachment_id_from_url( $out['src'] );
+
+		/* If we couldn't get an attachment from the 'src' attribute, check other supported file extensions. */
+		if ( empty( $attachment_id ) ) {
+
+			$default_types = wp_get_video_extensions();
+
+			foreach ( $default_types as $type ) {
+
+				if ( !empty( $out[ $type ] ) ) {
+					$attachment_id = socially_awkward_get_attachment_id_from_url( $out[ $type ] );
+
+					if ( !empty( $attachment_id ) )
+						break;
+				}
+			}
+		}
+
+		/* If there's an attachment ID at this point. */
+		if ( !empty( $attachment_id ) ) {
+
+			/* Get the attachment's featured image. */
+			$image = get_the_image( 
+				array( 
+					'post_id'      => $attachment_id, 
+					'size'         => 'full',
+					'callback'     => 'socially_awkward_sub_attachment_image', 
+					'format'       => 'array',
+					'echo'         => false
+				) 
+			);
+		}
+
+		/* If no image has been found and we're in the post loop, see if the current post has a featured image. */
+		if ( empty( $image ) && get_post() )
+			$image = get_the_image( array( 'size' => 'full', 'format' => 'array', 'echo' => false ) );
+
+		/* Set the 'poster' attribute if we have an image at this point. */
+		if ( !empty( $image ) )
+			$out['poster'] = $image['src'];
+	}
+
+	return $out;
 }
 
 /**
