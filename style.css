@@ -476,11 +476,21 @@ video {
 			height:   100%;
 		}
 
+		.mejs-overlay-loading span {
+			background: transparent url( 'css/mediaelement/images/loading.gif' ) 50% 50% no-repeat;
+		}
+
 		.mejs-button button {
 			height:     16px;
 			width:      16px;
-			background: none;
+			background: transparent url( 'css/mediaelement/images/controls.png' ) no-repeat;
 		}
+
+			.mejs-fullscreen-button button,
+			.mejs-playpause-button button,
+			.mejs-volume-button button {
+				background: none;
+			}
 
 			.mejs-button button:focus {
 				outline: solid 1px #2980b9;
