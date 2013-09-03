@@ -14,7 +14,7 @@
 		</div><!-- .entry-content -->
 
 		<footer class="entry-footer">
-			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . __( '[post-format-link] [entry-published] [entry-edit-link]<br />[entry-terms taxonomy="category" before="Posted in "]<br />[entry-terms before="Tagged "]', 'socially-awkward' ) . '</div>' ); ?>
+			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">[post-format-link] [entry-published] [entry-edit-link]<br />[entry-terms taxonomy="category" before="' . __( 'Posted in', 'socially-awkward' ) . ' "]<br />[entry-terms before="' . __( 'Tagged', 'socially-awkward' ) . ' "]</div>' ); ?>
 		</footer><!-- .entry-footer -->
 
 	<?php } else { ?>
@@ -33,7 +33,7 @@
 		<?php if ( !get_option( 'show_avatars' ) ) { ?>
 
 			<footer class="entry-footer">
-				<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . __( '[post-format-link] [entry-published] [entry-permalink] [entry-edit-link]', 'socially-awkward' ) . '</div>' ); ?>
+				<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">[post-format-link] [entry-published] [entry-permalink] [entry-edit-link]</div>' ); ?>
 			</footer><!-- .entry-footer -->
 
 		<?php } ?>

@@ -19,6 +19,10 @@
 			<?php wp_link_pages( array( 'before' => '<p class="page-links">' . __( 'Pages:', 'socially-awkward' ), 'after' => '</p>' ) ); ?>
 		</div><!-- .entry-content -->
 
+		<footer class="entry-footer">
+			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">[entry-published] [entry-edit-link]</div>' ); ?>
+		</footer><!-- .entry-footer -->
+
 	<?php } else { ?>
 
 		<header class="entry-header">

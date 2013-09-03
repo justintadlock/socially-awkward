@@ -22,7 +22,6 @@
 		</header><!-- .entry-header -->
 
 		<div class="entry-summary">
-			<?php get_the_image(); ?>
 			<?php the_excerpt(); ?>
 			<?php wp_link_pages( array( 'before' => '<p class="page-links">' . '<span class="before">' . __( 'Pages:', 'socially-awkward' ) . '</span>', 'after' => '</p>' ) ); ?>
 		</div><!-- .entry-summary -->

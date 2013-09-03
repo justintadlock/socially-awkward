@@ -4,7 +4,7 @@
 
 		<header class="entry-header">
 			<h1 class="entry-title"><?php single_post_title(); ?></h1>
-			<?php echo apply_atomic_shortcode( 'entry_byline', '<div class="entry-byline">' . __( '[post-format-link] [entry-published] [entry-comments-link] [entry-edit-link]', 'socially-awkward' ) . '</div>' ); ?>
+			<?php echo apply_atomic_shortcode( 'entry_byline', '<div class="entry-byline">[post-format-link] [entry-published] [entry-comments-link] [entry-edit-link]</div>' ); ?>
 		</header><!-- .entry-header -->
 
 		<?php if ( has_excerpt() ) { ?>
@@ -19,13 +19,13 @@
 		</div><!-- .entry-content -->
 
 		<footer class="entry-footer">
-			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . __( '[entry-terms taxonomy="category" before="Posted in "]<br />[entry-terms before="Tagged "]', 'socially-awkward' ) . '</div>' ); ?>
+			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">[entry-terms taxonomy="category" before="' . __( 'Posted in', 'socially-awkward' ) . ' "]<br />[entry-terms before="' . __( 'Tagged', 'socially-awkward' ) .' "]</div>' ); ?>
 		</footer><!-- .entry-footer -->
 
 	<?php } else { ?>
 
 		<header class="entry-header">
-			<?php the_title( '<h2 class="entry-title"><a href="' . get_permalink() . '">', '</a></h2>' ); ?>
+			<?php echo apply_atomic_shortcode( 'entry_title', '[entry-title]' ); ?>
 		</header><!-- .entry-header -->
 
 		<?php if ( has_excerpt() ) { ?>
@@ -44,7 +44,7 @@
 		<?php } ?>
 
 		<footer class="entry-footer">
-			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . __( '[post-format-link] [entry-published] [entry-comments-link] [entry-edit-link]', 'socially-awkward' ) . '</div>' ); ?>
+			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">[post-format-link] [entry-published] [entry-comments-link] [entry-edit-link]</div>' ); ?>
 		</footer>
 
 	<?php } ?>

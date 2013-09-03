@@ -15,14 +15,14 @@
 		</div><!-- .entry-content -->
 
 		<footer class="entry-footer">
-			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . __( '[entry-terms taxonomy="category" before="Posted in "]<br />[entry-terms before="Tagged "]', 'socially-awkward' ) . '</div>' ); ?>
+			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">[entry-terms taxonomy="category" before="' . __( 'Posted in', 'socially-awkward' ) . ' "]<br />[entry-terms before="' . __( 'Tagged', 'socially-awkward' ) .' "]</div>' ); ?>
 		</footer><!-- .entry-footer -->
 
 	<?php } else { ?>
 
 		<header class="entry-header">
 			<?php the_title( '<h2 class="entry-title"><a href="' . get_permalink() . '">', '</a></h2>' ); ?>
-			<?php echo apply_atomic_shortcode( 'entry_byline', '<div class="entry-byline">' . __( '[post-format-link] [entry-published] [entry-comments-link] [entry-edit-link]', 'socially-awkward' ) . '</div>' ); ?>
+			<?php echo apply_atomic_shortcode( 'entry_byline', '<div class="entry-byline">[post-format-link] [entry-published] [entry-comments-link] [entry-edit-link]</div>' ); ?>
 		</header><!-- .entry-header -->
 
 		<?php if ( has_excerpt() ) { ?>
@@ -31,7 +31,7 @@
 				<?php the_excerpt(); ?>
 			</div><!-- .entry-summary -->
 
-		<?php } elseif( empty( $audio ) ) { ?>
+		<?php } elseif ( empty( $audio ) ) { ?>
 
 			<div class="entry-content">
 				<?php the_content( __( 'Read more &rarr;', 'socially-awkward' ) ); ?>
