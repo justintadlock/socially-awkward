@@ -1080,9 +1080,12 @@ img.size-full {}
 
 		.format-status .avatar {
 			float:         left;
-			width:         80px;
-			height:        80px;
+			width:         70px;
+			height:        70px;
 			margin:        0 25px 25px 0;
+			padding:       0;
+			box-shadow:    0 0 0 10px #292929; /* Hack to get ios to play nice with border-radius. */
+			border:        none;
 			border-radius: 50px;
 		}
 
@@ -1603,12 +1606,12 @@ img.size-full {}
 
 			.comment-list .avatar {
 				float:         left;
-				width:         80px;
-				height:        80px;
+				width:         70px;
+				height:        70px;
 				margin:        0 25px 25px 0;
-				padding:       9px;
+				padding:       0;
 				background:    #292929;
-				border:        1px solid #202020;
+				box-shadow:    0 0 0 10px #292929; /* Hack to get ios to play nice with border-radius. */
 				border-radius: 50px;
 			}
 
@@ -1645,6 +1648,7 @@ img.size-full {}
 			/* === Comment text/content === */
 
 			.comment-content {
+				clear:         both;
 				margin:        0 0 25px;
 				padding:       25px 25px 0;
 				font-size:     1.25rem;
