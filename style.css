@@ -129,6 +129,7 @@ body {
 	padding:       50px 0 25px;
 	color:         #252525;
 	background:    #ecf0f1 url( 'images/bg-light.jpg' );
+	background-size: 50px 50px;
 	border-top:    5px solid #c0392b;
 	border-bottom: 5px solid #2980b9;
 }
@@ -821,6 +822,7 @@ img.size-full {}
 	padding:       50px 0 25px;
 	color:         #c5c5c5;
 	background:    #404040 url( 'images/bg-dark.jpg' );
+	background-size: 50px 50px;
 	border-top:    5px solid #000;
 	border-bottom: 5px solid #c0392b;
 }
@@ -856,6 +858,7 @@ img.size-full {}
 
 .sticky {
 	background: url( 'images/bg-dark-blue.jpg' );
+	background-size: 50px 50px;
 }
 
 	.sticky::before {
@@ -2160,6 +2163,7 @@ img.size-full {}
 		padding: 25px 25px 0 0;
 		z-index: 999;
 	background:    #404040 url( 'images/bg-dark.jpg' );
+	background-size: 50px 50px;
 	border-top:    5px solid #000;
 	border-bottom: 5px solid #c0392b;
 		display: none; /* visibility will be toggled with jquery */
