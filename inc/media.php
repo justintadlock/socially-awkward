@@ -386,7 +386,7 @@ function socially_awkward_get_audio_transcript( $post_id = 0 ) {
 		$lyrics = $meta['unsynchronised_lyric'];
 
 	/* Seen this misspelling of the id3 tag. */
-	elseif ( isset( $meta['unsychronised_lyric'] ) || isset( $meta['unsynchronised_lyric'] ) )
+	elseif ( isset( $meta['unsychronised_lyric'] ) )
 		$lyrics = $meta['unsychronised_lyric'];
 
 	/* If lyrics were found, run them through some of WP's text filters to make 'em purty. */
