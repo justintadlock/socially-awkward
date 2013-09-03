@@ -102,6 +102,7 @@ li.bypostauthor > .comment-meta .comment-author::before,
 .comments-nav a[rel="prev"]::before,
 .comments-nav a[rel="next"]::after,
 .format-link .entry-title a::after,
+.more-link::after,
 .wp-audio-shortcode .mejs-controls .mejs-button button::after,
 .wp-video-shortcode .mejs-controls .mejs-button button::after,
 .wp-video-shortcode .mejs-overlay-button::after,
@@ -1494,7 +1495,8 @@ img.size-full {}
 			content: '\f430';
 			font-size: 20px;
 		}
-		.loop-nav a[rel="next"]::after {
+		.loop-nav a[rel="next"]::after,
+		.more-link::after {
 			content: '\f429';
 			font-size: 20px;
 		}
@@ -2261,7 +2263,8 @@ img.size-full {}
 /* Hide screen reader text. */
 .screen-reader-text,
 .loop-nav .meta-nav,
-.comments-nav .meta-nav {
+.comments-nav .meta-nav,
+.more-link .meta-nav {
 	position: absolute;
 	top:      -9999em;
 	left:     -9999em;

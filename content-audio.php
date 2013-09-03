@@ -34,7 +34,7 @@
 		<?php } elseif ( empty( $audio ) ) { ?>
 
 			<div class="entry-content">
-				<?php the_content( __( 'Read more &rarr;', 'socially-awkward' ) ); ?>
+				<?php the_content( __( 'Read more <span class="meta-nav">&rarr;</span>', 'socially-awkward' ) ); ?>
 				<?php wp_link_pages( array( 'before' => '<p class="page-links">' . '<span class="before">' . __( 'Pages:', 'socially-awkward' ) . '</span>', 'after' => '</p>' ) ); ?>
 			</div><!-- .entry-content -->
 

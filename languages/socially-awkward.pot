@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Socially Awkward WordPress Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-03 13:59-0600\n"
+"POT-Creation-Date: 2013-09-03 18:25-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team:  <justin@justintadlock.com>\n"
@@ -109,7 +109,7 @@ msgstr ""
 
 #: content-aside.php:22 content-audio.php:37 content-chat.php:40
 #: content-link.php:30 content-status.php:29 content-video.php:37
-msgid "Read more &rarr;"
+msgid "Read more <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
 #: content-attachment-image.php:14
