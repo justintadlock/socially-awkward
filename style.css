@@ -2084,6 +2084,7 @@ img.size-full {}
 			#menu-primary ul ul li {
 				float:   none;
 				display: block;
+				margin:  0;
 			}
 
 				#menu-primary ul ul li a {
