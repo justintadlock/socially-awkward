@@ -194,7 +194,10 @@ blockquote {
 
 	blockquote blockquote {}
 
-	blockquote cite {}
+	blockquote cite {
+		font-size: 0.875em;
+		font-variant: small-caps;
+	}
 
 	.format-quote blockquote {
 		margin:     0;
