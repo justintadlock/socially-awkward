@@ -942,6 +942,11 @@ img.size-full {}
 		font-size: 1.25rem;
 	}
 
+	.portfolio_item .entry-summary { 
+		text-align: center; 
+		font-style: italic; 
+	}
+
 	.entry-summary {}
 
 	/* === Post Footer === */
@@ -1050,10 +1055,9 @@ img.size-full {}
 		.format-link .entry-title {}
 
 			.format-link .entry-title a::after {
-				content: '\f429';
 				content: '\f442';
 				font-size: 32px;
-				vertical-align: bottom;
+				vertical-align: middle;
 			}
 			.format-link .entry-title a:hover {}
 
