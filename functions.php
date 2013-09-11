@@ -56,9 +56,6 @@ function socially_awkward_theme_setup() {
 	/* Register menus. */
 	add_theme_support( 'hybrid-core-menus', array( 'primary' ) );
 
-	/* No sidebars, but add the below code to your child theme and call dynamic_sidebar( 'example' ). */
-	// add_theme_support( 'hybrid-core-sidebars', array( 'primary', 'secondary', 'subsidiary' ) );
-
 	/* Load scripts. */
 	add_theme_support( 'hybrid-core-scripts', array( 'comment-reply', 'mobile-toggle' ) );
 
