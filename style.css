@@ -888,9 +888,11 @@ img.size-full {}
 		padding: 0 25px;
 		word-wrap: break-word;
 
+		/* Testing removing 'break-all'
 			-ms-word-break: break-all;
 		word-break: break-all;
-		word-break: break-word;
+		word-break: break-word;*/
+		word-break: normal;
 
 			-webkit-hyphens: auto;
 			-moz-hyphens: auto;
