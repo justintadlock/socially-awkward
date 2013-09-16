@@ -68,16 +68,6 @@ if ( is_singular() || is_front_page() || is_404() )
 			<?php if ( is_post_type_archive( 'portfolio_item' ) ) get_template_part( 'menu', 'portfolio' ); ?>
 		</div><!-- .loop-description -->
 
-	<?php } elseif ( is_post_type_archive() ) { ?>
-
-		<?php $post_type = get_post_type_object( get_query_var( 'post_type' ) ); ?>
-
-		<h1 class="loop-title"><?php post_type_archive_title(); ?></h1>
-
-		<div class="loop-description">
-			<?php if ( !empty( $post_type->description ) ) echo wpautop( $post_type->description ); ?>
-		</div><!-- .loop-description -->
-
 	<?php } elseif ( is_day() || is_month() || is_year() ) { ?>
 
 		<?php
