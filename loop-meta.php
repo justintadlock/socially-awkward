@@ -74,7 +74,7 @@ if ( is_singular() || is_front_page() || is_404() )
 			if ( is_day() )
 				$date = get_the_time( __( 'F d, Y', 'socially-awkward' ) );
 			elseif ( is_month() )
-				$date = get_the_time( __( 'F Y', 'socially-awkward' ) );
+				$date = single_month_title( '', false );
 			elseif ( is_year() )
 				$date = get_the_time( __( 'Y', 'socially-awkward' ) );
 		?>
