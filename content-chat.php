@@ -11,12 +11,14 @@
 			<div class="entry-summary">
 				<?php the_excerpt(); ?>
 			</div><!-- .entry-summary -->
-		<?php } ?>
+		<?php } else { ?>
 
 		<div class="entry-content">
 			<?php the_content(); ?>
 			<?php wp_link_pages( array( 'before' => '<p class="page-links">' . '<span class="before">' . __( 'Pages:', 'socially-awkward' ) . '</span>', 'after' => '</p>' ) ); ?>
 		</div><!-- .entry-content -->
+
+		<?php } ?>
 
 		<footer class="entry-footer">
 			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">[entry-terms taxonomy="category" before="' . __( 'Posted in', 'socially-awkward' ) . ' "]<br />[entry-terms before="' . __( 'Tagged', 'socially-awkward' ) .' "]</div>' ); ?>
