@@ -20,7 +20,7 @@
  *
  * @package    SociallyAwkward
  * @subpackage Functions
- * @version    0.1.2
+ * @version    0.1.3
  * @since      0.1.0
  * @author     Justin Tadlock <justin@justintadlock.com>
  * @copyright  Copyright (c) 2013, Justin Tadlock
