@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Socially Awkward WordPress Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-03 18:25-0600\n"
+"POT-Creation-Date: 2013-10-11 17:24-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team:  <justin@justintadlock.com>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _e;__;esc_attr_e;esc_attr__;esc_html_e;esc_html__;_x;"
 "_n;_x:1,2c;_n:1,2\n"
 "X-Poedit-Basepath: ../\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: attachment-meta.php:15
@@ -52,8 +52,8 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: comments-loop-nav.php:4
-msgid "&larr; Previous"
+#: comments-loop-nav.php:4 loop-nav.php:21
+msgid "<span class=\"meta-nav\">&larr;</span> Previous"
 msgstr ""
 
 #: comments-loop-nav.php:5
@@ -61,8 +61,8 @@ msgstr ""
 msgid "Page %1$s of %2$s"
 msgstr ""
 
-#: comments-loop-nav.php:6
-msgid "Next &rarr;"
+#: comments-loop-nav.php:6 loop-nav.php:21
+msgid "Next <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
 #: comments-loop.php:3
@@ -170,35 +170,30 @@ msgstr ""
 msgid "You are browsing the search results for \"%s\""
 msgstr ""
 
-#: loop-meta.php:85
+#: loop-meta.php:75
 msgid "F d, Y"
 msgstr ""
 
-#: loop-meta.php:87 library/extensions/breadcrumb-trail.php:1031
-#: library/functions/core-seo.php:90
-msgid "F Y"
-msgstr ""
-
-#: loop-meta.php:89 library/extensions/breadcrumb-trail.php:187
+#: loop-meta.php:79 library/extensions/breadcrumb-trail.php:187
 #: library/extensions/breadcrumb-trail.php:1027
 #: library/functions/context.php:565 library/functions/context.php:571
 #: library/functions/core-seo.php:94 library/functions/shortcodes.php:70
 msgid "Y"
 msgstr ""
 
-#: loop-meta.php:95
+#: loop-meta.php:85
 #, php-format
 msgid "You are browsing the site archives for %s."
 msgstr ""
 
-#: loop-meta.php:100 library/classes/widget-archives.php:44
+#: loop-meta.php:90 library/classes/widget-archives.php:44
 #: library/classes/widget-archives.php:142
 #: library/extensions/breadcrumb-trail.php:180
 #: library/functions/context.php:576
 msgid "Archives"
 msgstr ""
 
-#: loop-meta.php:103
+#: loop-meta.php:93
 msgid "You are browsing the site archives."
 msgstr ""
 
@@ -214,14 +209,6 @@ msgstr ""
 #: loop-nav.php:18
 #, php-format
 msgid "Next %s <span class=\"meta-nav\">&rarr;</span>"
-msgstr ""
-
-#: loop-nav.php:21
-msgid "<span class=\"meta-nav\">&larr;</span> Previous"
-msgstr ""
-
-#: loop-nav.php:21
-msgid "Next <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
 #: loop-nav.php:23
@@ -943,6 +930,11 @@ msgstr ""
 
 #: library/extensions/breadcrumb-trail.php:186
 msgid "F"
+msgstr ""
+
+#: library/extensions/breadcrumb-trail.php:1031
+#: library/functions/core-seo.php:90
+msgid "F Y"
 msgstr ""
 
 #: library/extensions/breadcrumb-trail.php:1035
