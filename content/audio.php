@@ -1,4 +1,4 @@
-<article<?php hybrid_post_attributes(); ?>>
+<article <?php hybrid_attr( 'post' ); ?>>
 
 	<?php echo ( $audio = hybrid_media_grabber( array( 'type' => 'audio', 'split_media' => true ) ) ); ?>
 

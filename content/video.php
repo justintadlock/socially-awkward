@@ -1,4 +1,4 @@
-<article<?php hybrid_post_attributes(); ?>>
+<article <?php hybrid_attr( 'post' ); ?>>
 
 	<?php echo ( $video = hybrid_media_grabber( array( 'type' => 'video', 'split_media' => true ) ) ); ?>
 

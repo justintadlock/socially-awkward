@@ -1,4 +1,4 @@
-<article<?php hybrid_post_attributes(); ?>>
+<article <?php hybrid_attr( 'post' ); ?>>
 
 	<?php socially_awkward_get_image(); ?>
 

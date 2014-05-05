@@ -1,4 +1,4 @@
-<article<?php hybrid_post_attributes(); ?>>
+<article <?php hybrid_attr( 'post' ); ?>>
 
 	<?php if ( is_singular( get_post_type() ) ) { ?>
 

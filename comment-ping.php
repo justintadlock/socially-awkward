@@ -1,4 +1,4 @@
-<li <?php hybrid_comment_attributes(); ?>>
+<li <?php hybrid_attr( 'comment' ); ?>>
 
 	<?php echo hybrid_avatar(); ?>
 

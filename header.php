@@ -5,7 +5,7 @@
 <?php wp_head(); // Hook required for scripts, styles, and other <head> items. ?>
 </head>
 
-<body <?php hybrid_body_attributes(); ?>>
+<body <?php hybrid_attr( 'body' ); ?>>
 
 	<div id="container">
 
