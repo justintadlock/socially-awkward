@@ -45,6 +45,9 @@ add_action( 'after_setup_theme', 'socially_awkward_theme_setup' );
  */
 function socially_awkward_theme_setup() {
 
+	/* temp. add deprecated. */
+	add_theme_support( 'hybrid-core-deprecated' );
+
 	/* Load includes. */
 	require_once( trailingslashit( get_template_directory() ) . 'inc/hybrid-core-x.php' );
 	require_once( trailingslashit( get_template_directory() ) . 'inc/media.php' );
