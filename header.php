@@ -1,15 +1,8 @@
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes( 'html' ); ?>>
 
 <head>
-
-<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
-<title><?php hybrid_document_title(); ?></title>
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="profile" href="http://gmpg.org/xfn/11" />
-<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<?php wp_head(); // wp_head ?>
-
+<?php wp_head(); // Hook required for scripts, styles, and other <head> items. ?>
 </head>
 
 <body <?php hybrid_body_attributes(); ?>>
