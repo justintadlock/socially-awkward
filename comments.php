@@ -6,11 +6,28 @@ if ( post_password_required() || ( !have_comments() && !comments_open() && !ping
 
 <section id="comments-template">
 
-	<div id="comments">
+	<?php if ( have_comments() ) : // Check if there are any comments. ?>
 
-		<?php get_template_part( 'comments-loop' ); // Loads the comments-loop.php template. ?>
+		<div id="comments">
 
-	</div><!-- #comments-->
+			<h3 id="comments-number"><?php comments_number(); ?></h3>
+
+			<ol class="comment-list">
+				<?php wp_list_comments(
+					array(
+						'callback'     => 'hybrid_comments_callback',
+						'end-callback' => 'hybrid_comments_end_callback'
+					)
+				); ?>
+			</ol><!-- .comment-list -->
+
+			<?php locate_template( array( 'misc/comments-nav.php' ), true ); // Loads the misc/comments-nav.php template. ?>
+
+		</div><!-- #comments-->
+
+	<?php endif; // End check for comments. ?>
+
+	<?php locate_template( array( 'misc/comments-error.php' ), true ); // Loads the misc/comments-error.php template. ?>
 
 	<?php comment_form(); // Loads the comment form. ?>
 
