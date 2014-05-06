@@ -470,13 +470,15 @@ video {
 		box-sizing: border-box;
 		width:      100%;
 		height:     50px;
-		padding:    10px;
+		padding:    0 10px;
 		background: #202020;
 	}
 
 		.wp-video-shortcode .mejs-controls {
 			opacity: 0.85;
 		}
+
+		.mejs-controls > div { margin-top: 10px; }
 
 		.wp-audio-shortcode .mejs-mediaelement {
 			position: relative;

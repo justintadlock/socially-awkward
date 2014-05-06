@@ -113,11 +113,8 @@ function socially_awkward_theme_setup() {
 	/* Add custom nav menu item classes. */
 	add_filter( 'nav_menu_css_class', 'socially_awkward_nav_menu_css_class', 10, 3 );
 
-	/* De-register stylesheets. */
-	add_action( 'wp_enqueue_scripts', 'socially_awkward_deregister_styles' );
-
-	/* Load custom styles. */
-	add_filter( "{$prefix}_styles", 'socially_awkward_styles' );
+	/* Register stylesheets. */
+	add_action( 'wp_enqueue_scripts', 'stargazer_register_styles', 0 );
 
 	/* Load custom scripts. */
 	add_action( 'wp_enqueue_scripts', 'socially_awkward_enqueue_scripts' );
@@ -130,35 +127,43 @@ function socially_awkward_theme_setup() {
 	add_filter( 'shortcode_atts_entry-comments-link', 'socially_awkward_entry_comments_link_atts' );
 }
 
+
 /**
- * Removes the WordPress mediaelement styles on the front end.  We're rolling our own.
+ * Registers custom stylesheets for the front end.
  *
- * @since  0.1.0
+ * @since  1.0.0
  * @access public
  * @return void
  */
-function socially_awkward_deregister_styles() {
-	wp_deregister_style( 'mediaelement' );
+function stargazer_register_styles() {
+	wp_deregister_style( 'mediaelement'    );
 	wp_deregister_style( 'wp-mediaelement' );
+
+	wp_register_style( 'socially-awkward-mediaelement', trailingslashit( get_template_directory_uri() ) . 'css/mediaelement/mediaelement.min.css' );
+}
+
+/**
+ * Removes the WordPress mediaelement styles on the front end.  We're rolling our own.
+ *
+ * @since      0.1.0
+ * @deprecated 1.0.0
+ * @access     public
+ * @return     void
+ */
+function socially_awkward_deregister_styles() {
 }
 
 /**
  * Adds a custom stylesheet to the Hybrid styles loader.  We need to do this so that it's loaded in the correct 
  * order (before the theme style).
  *
- * @since  0.1.0
- * @access public
- * @param  array  $styles
- * @return array
+ * @since      0.1.0
+ * @deprecated 1.0.0
+ * @access     public
+ * @param      array  $styles
+ * @return     array
  */
 function socially_awkward_styles( $styles ) {
-
-	$styles['socially-awkward-mediaelement'] = array(
-		'version' => '20130830.1',
-		'src'     => trailingslashit( get_template_directory_uri() ) . 'css/mediaelement/mediaelement.min.css'
-	);
-
-	return $styles;
 }
 
 /**
