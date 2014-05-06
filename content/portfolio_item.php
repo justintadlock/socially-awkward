@@ -1,51 +1,50 @@
 <article <?php hybrid_attr( 'post' ); ?>>
 
-	<?php socially_awkward_get_image(); ?>
+	<?php get_the_image( array( 'size' => 'socially-awkward-large', 'split_content' => true, 'scan_raw' => true, 'scan' => true, 'order' => array( 'scan_raw', 'scan', 'featured', 'attachment' ) ) ); ?>
 
-	<?php if ( is_singular( get_post_type() ) ) { ?>
+	<?php if ( is_singular( get_post_type() ) ) : // If viewing a single post. ?>
 
 		<header class="entry-header">
-			<h1 class="entry-title"><?php single_post_title(); ?></h1>
 
-			<?php echo apply_atomic_shortcode( 
-				'entry_byline', 
-				'<div class="entry-byline">' . 
-					hybrid_entry_terms_shortcode( array( 'taxonomy' => 'portfolio', 'before' => __( 'Portfolio:', 'socially-awkward' ) . ' ' ) ) . 
-				'</div>'
-			); ?>
+			<h1 <?php hybrid_attr( 'entry-title' ); ?>><?php single_post_title(); ?></h1>
+
+			<div class="entry-byline">
+				<?php hybrid_post_terms( array( 'taxonomy' => 'portfolio', 'text' => __( 'Portfolio', 'socially-awkward' ) ) ); ?>
+			</div><!-- .entry-byline -->
+
 		</header><!-- .entry-header -->
 
-		<div class="entry-content">
+		<div <?php hybrid_attr( 'entry-content' ); ?>>
 			<?php the_content(); ?>
-			<?php wp_link_pages( array( 'before' => '<p class="page-links">' . '<span class="before">' . __( 'Pages:', 'socially-awkward' ) . '</span>', 'after' => '</p>' ) ); ?>
+			<?php wp_link_pages(); ?>
 		</div><!-- .entry-content -->
 
 		<footer class="entry-footer">
-			<?php echo apply_atomic_shortcode( 
-				'entry_meta', 
-				'<div class="entry-meta">[entry-published] [entry-edit-link]' .
-					socially_awkward_get_portfolio_item_link() .  
-				'</div>' 
-			); ?>
+			<time <?php hybrid_attr( 'entry-published' ); ?>><?php echo get_the_date(); ?></time>
+			<?php edit_post_link(); ?>
+			<?php echo socially_awkward_get_portfolio_item_link(); ?>
 		</footer><!-- .entry-footer -->
 
-	<?php } else { ?>
+	<?php else : // If not viewing a single post. ?>
 
 		<header class="entry-header">
-			<?php echo apply_atomic_shortcode( 'entry_title', '[entry-title]' ); ?>
+			<?php the_title( '<h2 ' . hybrid_get_attr( 'entry-title' ) . '><a href="' . get_permalink() . '" rel="bookmark" itemprop="url">', '</a></h2>' ); ?>
 		</header><!-- .entry-header -->
 
-		<div class="entry-summary">
-			<?php if ( has_excerpt() ) {
-				the_excerpt();
-				wp_link_pages( array( 'before' => '<p class="page-links">' . '<span class="before">' . __( 'Pages:', 'socially-awkward' ) . '</span>', 'after' => '</p>' ) );
-			} ?>
-		</div><!-- .entry-summary -->
+		<?php if ( has_excerpt() ) : // If the post has an excerpt. ?>
+
+			<div <?php hybrid_attr( 'entry-summary' ); ?>>
+				<?php the_excerpt(); ?>
+				<?php wp_link_pages(); ?>
+			</div><!-- .entry-summary -->
+
+		<?php endif; // End excerpt check. ?>
 
 		<footer class="entry-footer">
-			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">[entry-published] [entry-edit-link]</div>' ); ?>
+			<time <?php hybrid_attr( 'entry-published' ); ?>><?php echo get_the_date(); ?></time>
+			<?php edit_post_link(); ?>
 		</footer><!-- .entry-footer -->
 
-	<?php } ?>
+	<?php endif; // End single post check. ?>
 
-</article><!-- .hentry -->
+</article><!-- .entry -->

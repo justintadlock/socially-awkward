@@ -1,43 +1,53 @@
 <article <?php hybrid_attr( 'post' ); ?>>
 
-	<?php if ( is_singular( get_post_type() ) ) { ?>
+	<?php if ( is_singular( get_post_type() ) ) : // If viewing a single post. ?>
 
-		<?php if ( get_option( 'show_avatars' ) ) { ?>
+		<?php if ( get_option( 'show_avatars' ) ) : // If avatars are enabled. ?>
+
 			<header class="entry-header">
 				<?php echo get_avatar( get_the_author_meta( 'email' ) ); ?>
 			</header><!-- .entry-header -->
-		<?php } ?>
 
-		<div class="entry-content">
+		<?php endif; // End avatars check. ?>
+
+		<div <?php hybrid_attr( 'entry-content' ); ?>>
 			<?php the_content(); ?>
-			<?php wp_link_pages( array( 'before' => '<p class="page-links">' . '<span class="before">' . __( 'Pages:', 'socially-awkward' ) . '</span>', 'after' => '</p>' ) ); ?>
+			<?php wp_link_pages(); ?>
 		</div><!-- .entry-content -->
 
 		<footer class="entry-footer">
-			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">[post-format-link] [entry-published] [entry-edit-link]<br />[entry-terms taxonomy="category" before="' . __( 'Posted in', 'socially-awkward' ) . ' "]<br />[entry-terms before="' . __( 'Tagged', 'socially-awkward' ) . ' "]</div>' ); ?>
+			<?php hybrid_post_format_link(); ?>
+			<time <?php hybrid_attr( 'entry-published' ); ?>><?php echo get_the_date(); ?></time>
+			<?php edit_post_link(); ?>
+			<?php hybrid_post_terms( array( 'taxonomy' => 'category', 'text' => __( 'Posted in %s', 'socially-awkward' ) ) ); ?>
+			<?php hybrid_post_terms( array( 'taxonomy' => 'post_tag', 'text' => __( 'Tagged %s', 'socially-awkward' ), 'before' => '<br />' ) ); ?>
 		</footer><!-- .entry-footer -->
 
-	<?php } else { ?>
+	<?php else : // If not viewing a single post. ?>
 
-		<?php if ( get_option( 'show_avatars' ) ) { ?>
+		<?php if ( get_option( 'show_avatars' ) ) : // If avatars are enabled. ?>
+
 			<header class="entry-header">
 				<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php echo get_avatar( get_the_author_meta( 'email' ) ); ?></a>
 			</header><!-- .entry-header -->
-		<?php } ?>
 
-		<div class="entry-content">
-			<?php the_content( __( 'Read more <span class="meta-nav">&rarr;</span>', 'socially-awkward' ) ); ?>
-			<?php wp_link_pages( array( 'before' => '<p class="page-links">' . '<span class="before">' . __( 'Pages:', 'socially-awkward' ) . '</span>', 'after' => '</p>' ) ); ?>
+		<?php endif; // End avatars check. ?>
+
+		<div <?php hybrid_attr( 'entry-content' ); ?>>
+			<?php the_content(); ?>
 		</div><!-- .entry-content -->
 
-		<?php if ( !get_option( 'show_avatars' ) ) { ?>
+		<?php if ( !get_option( 'show_avatars' ) ) : // If avatars are not enabled. ?>
 
 			<footer class="entry-footer">
-				<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">[post-format-link] [entry-published] [entry-permalink] [entry-edit-link]</div>' ); ?>
+				<?php hybrid_post_format_link(); ?>
+				<time <?php hybrid_attr( 'entry-published' ); ?>><?php echo get_the_date(); ?></time>
+				<a class="entry-permalink" href="<?php the_permalink(); ?>" rel="bookmark" itemprop="url"><?php _e( 'Permalink', 'socially-awkward' ); ?></a>
+				<?php edit_post_link(); ?>
 			</footer><!-- .entry-footer -->
 
-		<?php } ?>
+		<?php endif; // End avatars check. ?>
 
-	<?php } ?>
+	<?php endif; // End single post check. ?>
 
-</article><!-- .hentry -->
+</article><!-- .entry -->

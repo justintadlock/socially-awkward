@@ -1,52 +1,66 @@
 <article <?php hybrid_attr( 'post' ); ?>>
 
-	<?php if ( is_singular( get_post_type() ) ) { ?>
+	<?php if ( is_singular( get_post_type() ) ) : // If viewing a single post. ?>
 
 		<header class="entry-header">
-			<h1 class="entry-title"><?php single_post_title(); ?></h1>
-			<?php echo apply_atomic_shortcode( 'entry_byline', '<div class="entry-byline">[post-format-link] [entry-published] [entry-comments-link] [entry-edit-link]</div>' ); ?>
+
+			<h1 <?php hybrid_attr( 'entry-title' ); ?>><?php single_post_title(); ?></h1>
+
+			<div class="entry-byline">
+				<?php hybrid_post_format_link(); ?>
+				<time <?php hybrid_attr( 'entry-published' ); ?>><?php echo get_the_date(); ?></time>
+				<?php comments_popup_link( number_format_i18n( 0 ), number_format_i18n( 1 ), '%', 'comments-link', '' ); ?>
+				<?php edit_post_link(); ?>
+			</div><!-- .entry-byline -->
+
 		</header><!-- .entry-header -->
 
-		<?php if ( has_excerpt() ) { ?>
-			<div class="entry-summary">
+		<?php if ( has_excerpt() ) : // If the post has an excerpt. ?>
+
+			<div <?php hybrid_attr( 'entry-summary' ); ?>>
 				<?php the_excerpt(); ?>
 			</div><!-- .entry-summary -->
-		<?php } ?>
 
-		<div class="entry-content">
+		<?php endif; // End post excerpt check. ?>
+
+		<div <?php hybrid_attr( 'entry-content' ); ?>>
 			<?php the_content(); ?>
-			<?php wp_link_pages( array( 'before' => '<p class="page-links">' . '<span class="before">' . __( 'Pages:', 'socially-awkward' ) . '</span>', 'after' => '</p>' ) ); ?>
+			<?php wp_link_pages(); ?>
 		</div><!-- .entry-content -->
 
 		<footer class="entry-footer">
-			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">[entry-terms taxonomy="category" before="' . __( 'Posted in', 'socially-awkward' ) . ' "]<br />[entry-terms before="' . __( 'Tagged', 'socially-awkward' ) .' "]</div>' ); ?>
+			<?php hybrid_post_terms( array( 'taxonomy' => 'category', 'text' => __( 'Posted in %s', 'socially-awkward' ) ) ); ?>
+			<?php hybrid_post_terms( array( 'taxonomy' => 'post_tag', 'text' => __( 'Tagged %s', 'socially-awkward' ), 'before' => '<br />' ) ); ?>
 		</footer><!-- .entry-footer -->
 
-	<?php } else { ?>
+	<?php else : // If not viewing a single post. ?>
 
 		<header class="entry-header">
-			<?php echo apply_atomic_shortcode( 'entry_title', '[entry-title]' ); ?>
+			<?php the_title( '<h2 ' . hybrid_get_attr( 'entry-title' ) . '><a href="' . get_permalink() . '" rel="bookmark" itemprop="url">', '</a></h2>' ); ?>
 		</header><!-- .entry-header -->
 
-		<?php if ( has_excerpt() ) { ?>
+		<?php if ( has_excerpt() ) : // If the post has an excerpt. ?>
 
 			<div class="entry-summary">
 				<?php the_excerpt(); ?>
 			</div><!-- .entry-summary -->
 
-		<?php } else { ?>
+		<?php else: // If post doesn't have an excerpt. ?>
 
 			<div class="entry-content">
-				<?php the_content( __( 'Read more <span class="meta-nav">&rarr;</span>', 'socially-awkward' ) ); ?>
-				<?php wp_link_pages( array( 'before' => '<p class="page-links">' . '<span class="before">' . __( 'Pages:', 'socially-awkward' ) . '</span>', 'after' => '</p>' ) ); ?>
+				<?php the_content(); ?>
+				<?php wp_link_pages(); ?>
 			</div><!-- .entry-content -->
 
-		<?php } ?>
+		<?php endif; // End post excerpt check. ?>
 
 		<footer class="entry-footer">
-			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">[post-format-link] [entry-published] [entry-comments-link] [entry-edit-link]</div>' ); ?>
-		</footer>
+			<?php hybrid_post_format_link(); ?>
+			<time <?php hybrid_attr( 'entry-published' ); ?>><?php echo get_the_date(); ?></time>
+			<?php comments_popup_link( number_format_i18n( 0 ), number_format_i18n( 1 ), '%', 'comments-link', '' ); ?>
+			<?php edit_post_link(); ?>
+		</footer><!-- .entry-footer -->
 
-	<?php } ?>
+	<?php endif; // End single post check. ?>
 
-</article><!-- .hentry -->
+</article><!-- .entry -->
