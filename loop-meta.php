@@ -10,7 +10,7 @@ if ( is_singular() || is_front_page() || is_404() )
 
 		<h1 class="loop-title"><?php echo get_post_field( 'post_title', get_queried_object_id() ); ?></h1>
 
-		<?php get_template_part( 'menu', 'formats' ); ?>
+		<?php hybrid_get_menu( 'formats' ); // Loads the menu/formats.php template. ?>
 
 	<?php } elseif ( is_category() ) { ?>
 
@@ -35,9 +35,13 @@ if ( is_singular() || is_front_page() || is_404() )
 		<div class="loop-description">
 			<?php echo term_description( '', get_query_var( 'taxonomy' ) ); ?>
 
-			<?php if ( is_tax( 'portfolio' ) ) get_template_part( 'menu', 'portfolio' ); ?>
+			<?php if ( is_tax( 'portfolio' ) ) : ?>
+				<?php hybrid_get_menu( 'portfolio' ); // Loads the menu/portfolio.php template. ?>
+			<?php endif; ?>
 
-			<?php if ( is_tax( 'post_format' ) ) get_template_part( 'menu', 'formats' ); ?>
+			<?php if ( is_tax( 'post_format' ) ) : ?>
+				<?php hybrid_get_menu( 'formats' ); // Loads the menu/formats.php template. ?>
+			<?php endif; ?>
 		</div><!-- .loop-description -->
 
 	<?php } elseif ( is_author() ) { ?>
@@ -65,7 +69,9 @@ if ( is_singular() || is_front_page() || is_404() )
 		<div class="loop-description">
 			<?php if ( !empty( $post_type->description ) ) echo wpautop( $post_type->description ); ?>
 
-			<?php if ( is_post_type_archive( 'portfolio_item' ) ) get_template_part( 'menu', 'portfolio' ); ?>
+			<?php if ( is_post_type_archive( 'portfolio_item' ) ) : ?>
+				<?php hybrid_get_menu( 'portfolio' ); // Loads the menu/portfolio.php template. ?>
+			<?php endif; ?>
 		</div><!-- .loop-description -->
 
 	<?php } elseif ( is_day() || is_month() || is_year() ) { ?>

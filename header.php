@@ -18,6 +18,6 @@
 
 		</header><!-- #header -->
 
-		<?php get_template_part( 'menu', 'primary' ); // Loads the menu-primary.php template. ?>
+		<?php hybrid_get_menu( 'primary' ); // Loads the menu/primary.php template. ?>
 
 		<div id="main">

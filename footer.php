@@ -4,7 +4,7 @@
 
 			<div class="wrap">
 
-				<?php get_template_part( 'menu', 'social' ); // Loads the menu-social.php template. ?>
+				<?php hybrid_get_menu( 'social' ); // Loads the menu/social.php template. ?>
 
 				<div class="footer-content">
 
