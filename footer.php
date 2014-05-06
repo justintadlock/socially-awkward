@@ -7,8 +7,18 @@
 				<?php get_template_part( 'menu', 'social' ); // Loads the menu-social.php template. ?>
 
 				<div class="footer-content">
-					<?php echo apply_atomic_shortcode( 'footer_content', '<p class="credit">' . __( 'Copyright &copy; [the-year] [site-link].<br />Powered by [wp-link] and [theme-link].', 'socially-awkward' ) . '</p>' ); ?>
-				</div><!-- .footer-content -->
+
+				<p class="credit">
+					<?php printf(
+						/* Translators: 1 is current year, 2 is site name/link. */
+						__( 'Copyright &#169; %1$s %2$s.', 'socially-awkward' ), date_i18n( 'Y' ), hybrid_get_site_link()
+					); ?>
+					<br />
+					<?php printf(
+						/* Translators: 1 is WordPress link, 2 is theme name/link. */
+						__( 'Powered by %1$s and %2$s.', 'socially-awkward' ), hybrid_get_wp_link(), hybrid_get_theme_link()
+					); ?>
+				</p><!-- .credit -->
 
 			</div>
 
