@@ -820,7 +820,7 @@ img.size-full {}
 	margin:    0 auto 25px;
 }
 
-.hentry,
+.entry,
 .attachment-meta,
 .loop-meta,
 #comments-template {
@@ -840,26 +840,26 @@ img.size-full {}
 
 /* ====== POSTS ====== */
 
-.hentry {}
+.entry {}
 
 
 		/* Adjust for border at top of post container. */
-		.hentry > .wp-caption,
-		.hentry > img,
-		.hentry > a img {
+		.entry > .wp-caption,
+		.entry > img,
+		.entry > a img {
 			display: block;
 			margin: -55px auto 25px;
 		}
 
-		.hentry > .mejs-container,
-		.hentry > div[style*="max-width"],
-		.hentry > .embed-wrap,
-		.hentry > .audio-shortcode-wrap,
-		.hentry > video,
-		.hentry > audio,
-		.hentry > iframe,
-		.hentry > embed,
-		.hentry > object {
+		.entry > .mejs-container,
+		.entry > div[style*="max-width"],
+		.entry > .embed-wrap,
+		.entry > .audio-shortcode-wrap,
+		.entry > video,
+		.entry > audio,
+		.entry > iframe,
+		.entry > embed,
+		.entry > object {
 			margin-top: -50px;
 		}
 
@@ -2282,7 +2282,7 @@ img.size-full {}
 .clearfix::after,
 #header::after,
 #footer::after,
-.hentry::after,
+.entry::after,
 .entry-summary::after,
 .entry-content::after,
 .loop-nav::after,
