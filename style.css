@@ -104,7 +104,6 @@ li.bypostauthor > .comment-meta .comment-author::before,
 .comments-nav a[rel="prev"]::before,
 .comments-nav a[rel="next"]::after,
 .format-link .entry-title a::after,
-.more-link::after,
 .wp-playlist-playing .wp-playlist-caption::before,
 .wp-playlist-item-meta::before,
 .mejs-controls .mejs-button button::after,
@@ -1028,6 +1027,9 @@ img.size-full {}
 
 	.entry-summary {}
 
+	.more-link        { text-decoration: none;      }
+	.more-link:hover { text-decoration: underline; }
+
 	/* === Post Footer === */
 
 	.entry-footer {
@@ -1572,8 +1574,7 @@ img.size-full {}
 			content: '\f430';
 			font-size: 20px;
 		}
-		.loop-nav a[rel="next"]::after,
-		.more-link::after {
+		.loop-nav a[rel="next"]::after {
 			content: '\f429';
 			font-size: 20px;
 		}
@@ -2310,8 +2311,7 @@ img.size-full {}
 /* Hide screen reader text. */
 .screen-reader-text,
 .loop-nav .meta-nav,
-.comments-nav .meta-nav,
-.more-link .meta-nav {
+.comments-nav .meta-nav {
 	position: absolute;
 	top:      -9999em;
 	left:     -9999em;
