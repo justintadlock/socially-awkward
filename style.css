@@ -925,6 +925,10 @@ img.size-full {}
 			margin: -55px auto 25px;
 		}
 
+		.entry > .wp-playlist {
+			margin-top: -25px;
+		}
+
 		.entry > .mejs-container,
 		.entry > div[style*="max-width"],
 		.entry > .embed-wrap,
