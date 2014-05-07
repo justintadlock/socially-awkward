@@ -1,10 +1,34 @@
 <?php
 /**
- * Functions and filters for handling media in the theme.
+ * Sets up custom filters and actions for the theme.  This does things like sets up sidebars, menus, scripts, 
+ * and lots of other awesome stuff that WordPress themes do.
  *
- * @package SociallyAwkward
- * @since   0.1.0
+ * @package    SociallyAwkward
+ * @subpackage Functions
+ * @author     Justin Tadlock <justin@justintadlock.com>
+ * @copyright  Copyright (c) 2013 - 2014, Justin Tadlock
+ * @link       http://themehybrid.com/themes/socially-awkward
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
+
+/* Register custom image sizes. */
+add_action( 'init', 'socially_awkward_register_image_sizes' );
+
+/* Register custom nav menus. */
+add_action( 'init', 'socially_awkward_register_nav_menus' );
+
+/* Add custom nav menu item classes. */
+add_filter( 'nav_menu_css_class', 'socially_awkward_nav_menu_css_class', 10, 3 );
+
+/* Register stylesheets. */
+add_action( 'wp_enqueue_scripts', 'stargazer_register_styles', 0 );
+
+/* Load custom scripts. */
+add_action( 'wp_enqueue_scripts', 'socially_awkward_enqueue_scripts' );
+
+/* Use post formats to decide prev/next post. */
+add_filter( 'get_previous_post_join', 'socially_awkward_adjacent_post_join' );
+add_filter( 'get_next_post_join',     'socially_awkward_adjacent_post_join' );
 
 /* Filters the [audio] shortcode. */
 add_filter( 'wp_audio_shortcode', 'socially_awkward_audio_shortcode', 10, 4 );
@@ -14,6 +38,180 @@ add_filter( 'wp_video_shortcode', 'socially_awkward_video_shortcode', 10, 3 );
 
 /* Filter the [video] shortcode attributes. */
 add_filter( 'shortcode_atts_video', 'socially_awkward_video_atts' );
+
+
+/**
+ * Registers custom stylesheets for the front end.
+ *
+ * @since  1.0.0
+ * @access public
+ * @return void
+ */
+function stargazer_register_styles() {
+	wp_deregister_style( 'mediaelement'    );
+	wp_deregister_style( 'wp-mediaelement' );
+
+	wp_register_style( 'socially-awkward-mediaelement', trailingslashit( get_template_directory_uri() ) . 'css/mediaelement/mediaelement.min.css' );
+}
+/**
+ * Loads scripts needed by the theme.
+ *
+ * @since  0.1.0
+ * @access public
+ * @return void
+ */
+function socially_awkward_enqueue_scripts() {
+
+	wp_enqueue_script( 
+		'socially-awkward', 
+		hybrid_locate_theme_file( array( 'js/socially-awkward.js' ) ), 
+		array( 'jquery' ),
+		'20130812',
+		true
+	);
+}
+
+/**
+ * Adds custom nav menu item classes.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  array   $classes
+ * @param  object  $item
+ * @param  object  $args
+ */
+function socially_awkward_nav_menu_css_class( $classes, $item, $args ) {
+
+	if ( 'formats' === $args->theme_location && 'taxonomy' === $item->type && 'post_format' === $item->object )
+		$classes[] = 'menu-item-' . hybrid_clean_post_format_slug( get_term_field( 'slug', $item->object_id, $item->object, 'attribute' ) );
+
+	if ( 'post_type' === $item->type && 'page' === $item->object && $item->object_id == get_option( 'page_for_posts' ) )
+		$classes[] = 'menu-item-blog';
+
+	return $classes;
+}
+
+/**
+ * Registers custom image sizes for the theme.
+ *
+ * @since  0.1.0
+ * @access public
+ * @return void
+ */
+function socially_awkward_register_image_sizes() {
+	set_post_thumbnail_size( 175, 131, true );
+	add_image_size( 'socially-awkward-large', 960, 720, true );
+}
+
+/**
+ * Registers custom nav menus for the theme.
+ *
+ * @since  0.1.0
+ * @access public
+ * @return void
+ */
+function socially_awkward_register_nav_menus() {
+
+	register_nav_menu( 'primary', esc_html__( 'Primary', 'socially-awkward' ) );
+
+	register_nav_menu( 'social', esc_html__( 'Social', 'socially-awkward' ) );
+
+	register_nav_menu( 'formats', esc_html__( 'Formats', 'socially-awkward' ) );
+
+	if ( post_type_exists( 'portfolio_item' ) )
+		register_nav_menu( 'portfolio', esc_html__( 'Portfolio', 'socially-awkward' ) );
+}
+
+/**
+ * Registers custom fonts for the theme.
+ *
+ * Note that I'm passing an empty array() as the 'selectors' argument. This is so that the Theme Fonts script 
+ * won't auto-output the CSS, which I'm simply handling in 'style.css'.  Most likely, this code will change 
+ * drastically in future versions as the Theme Fonts class allows more flexibility.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  object  $fonts
+ * @return void
+ */
+function socially_awkward_register_fonts( $fonts ) {
+
+	/* Body copy. */
+	$fonts->add_setting( array( 'id' => 'body', 'default' => 'lora', 'selectors' => array() ) );
+	$fonts->add_setting( array( 'id' => 'body-italic', 'default' => 'lora-italic', 'selectors' => array() ) );
+	$fonts->add_setting( array( 'id' => 'body-bold', 'default' => 'lora-bold', 'selectors' => array() ) );
+	$fonts->add_setting( array( 'id' => 'body-bold-italic', 'default' => 'lora-bold-italic', 'selectors' => array() ) );
+
+	/* Headers and other bold fonts. */
+	$fonts->add_setting( array( 'id' => 'headers', 'default' => 'open-sans-condensed', 'selectors' => array() ) );
+
+	/* Misc. secondary font. */
+	$fonts->add_setting( array( 'id' => 'accent', 'default' => 'open-sans', 'selectors' => array() ) );
+
+	/* Lora font family (normal, italic, bold, bold italic). */
+	$fonts->add_font(
+		array( 'handle' => 'lora', 'family' => 'Lora', 'type' => 'google' )
+	);
+	$fonts->add_font(
+		array( 'handle' => 'lora-italic', 'family' => 'Lora', 'style' => 'italic', 'type' => 'google' )
+	);
+	$fonts->add_font(
+		array( 'handle' => 'lora-bold', 'family' => 'Lora', 'weight' => 700, 'type' => 'google' )
+	);
+	$fonts->add_font(
+		array( 'handle' => 'lora-bold-italic', 'family' => 'Lora', 'weight' => 700, 'style' => 'italic', 'type' => 'google' )
+	);
+
+	/* Open Sans Condensed font family. */
+	$fonts->add_font(
+		array( 'handle' => 'open-sans-condensed', 'family' => 'Open Sans Condensed', 'weight' => 700, 'type'   => 'google' ) 
+	);
+
+	/* Open Sans font family. */
+	$fonts->add_font(
+		array( 'handle' => 'open-sans', 'family' => 'Open Sans', 'type' => 'google' )
+	);
+}
+
+/**
+ * Changes the next/previous single post links based on the post format.
+ *
+ * @since  0.1.0
+ * @access public
+ * @param  string  $join
+ * @return string
+ */
+function socially_awkward_adjacent_post_join( $join ) {
+	global $wpdb;
+
+	$post_id   = get_the_ID();
+	$post_type = get_post_type();
+
+	/* Only run if the post type supports 'post-formats'. */
+	if ( post_type_supports( $post_type, 'post-formats' ) ) {
+
+		/* Gets an array of post format IDs for the post. */
+		$term_ids = wp_get_object_terms( $post_id, 'post_format', array( 'fields' => 'ids' ) );
+
+		/* If no post format IDs or if an error was returned, return the original $join. */
+		if ( empty( $term_ids ) || is_wp_error( $term_ids ) )
+			return $join;
+
+		/* Set up the join. */
+		$join = $wpdb->prepare( 
+			" INNER JOIN $wpdb->term_relationships 
+			  AS tr 
+			  ON p.ID = tr.object_id 
+			  INNER JOIN $wpdb->term_taxonomy tt 
+			  ON tr.term_taxonomy_id = tt.term_taxonomy_id 
+			  AND tt.taxonomy = 'post_format' 
+			  AND tt.term_id = %d", 
+			array_shift( $term_ids ) 
+		);
+	}
+
+	return $join;
+}
 
 /**
  * Adds a featured image (if one exists) next to the audio player.  Also adds a section below the player to 
@@ -201,6 +399,55 @@ function socially_awkward_video_atts( $out ) {
 	}
 
 	return $out;
+}
+
+/* === CPT: PORTFOLIO PLUGIN. === */
+
+	/**
+	 * Returns a link to the porfolio item URL if it has been set.
+	 *
+	 * @since  0.1.0
+	 * @access public
+	 * @return void
+	 */
+	function socially_awkward_get_portfolio_item_link() {
+
+		$url = get_post_meta( get_the_ID(), 'portfolio_item_url', true );
+
+		if ( !empty( $url ) )
+			return '<a class="portfolio-item-link" href="' . esc_url( $url ) . '">' . $url . '</a>';
+	}
+
+/* End CPT: Portfolio section. */
+
+/**
+ * @since      0.1.0
+ * @deprecated 1.0.0
+ */
+function socially_awkward_deregister_styles() {
+}
+
+/**
+ * @since      0.1.0
+ * @deprecated 1.0.0
+ */
+function socially_awkward_styles( $styles ) {
+}
+
+/**
+ * @since      0.1.0
+ * @deprecated 1.0.0
+ */
+function socially_awkward_entry_comments_link_atts( $out ) {
+	return $out;
+}
+
+/**
+ * @since      0.1.0
+ * @deprecated 1.0.0
+ */
+function socially_awkward_get_blog_url() {
+	return hybrid_get_blog_url();
 }
 
 /**
