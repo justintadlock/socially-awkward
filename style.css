@@ -105,9 +105,10 @@ li.bypostauthor > .comment-meta .comment-author::before,
 .comments-nav a[rel="next"]::after,
 .format-link .entry-title a::after,
 .more-link::after,
-.wp-audio-shortcode .mejs-controls .mejs-button button::after,
-.wp-video-shortcode .mejs-controls .mejs-button button::after,
-.wp-video-shortcode .mejs-overlay-button::after,
+.wp-playlist-playing .wp-playlist-caption::before,
+.wp-playlist-item-meta::before,
+.mejs-controls .mejs-button button::after,
+.mejs-overlay-button::after,
 .sticky::before {
 	display: inline-block;
 	-webkit-font-smoothing: antialiased;
@@ -416,6 +417,64 @@ video {
 	}
 
 
+/**
+ * WordPress playlist
+ *
+ * Customizes the output of the media playlist.  For the full media playlist styles, see the 
+ * `css/mediaelement/medialement.css` stylesheet.
+ */
+
+.wp-playlist {
+	padding: 0;
+	border:  none;
+}
+
+	.wp-playlist-dark  { 
+		padding-top: 1.5rem;
+		background: #202020;
+	}
+	.wp-video-playlist { padding-top: 0;      }
+
+	/* Currently playing. */
+	.wp-playlist-current-item {
+		padding: 0 1.5rem 0.75rem;
+	}
+
+		.wp-playlist-current-item img { max-width: 75px; }
+
+		.wp-playlist-item-meta { font-size: 1rem; }
+
+	/* Media player. */
+	.wp-playlist-dark .mejs-controls {
+		border-top:    1px solid #151515;
+		border-bottom: 1px solid #151515;
+	}
+
+	/* Playlist tracks (list of items). */
+
+	.wp-playlist-tracks {
+		margin-top: 0;
+		padding:    1rem 1.5rem;
+		border:     1px dotted #151515;
+	}
+
+		.wp-playlist-dark .wp-playlist-tracks { border: none; }
+
+		.wp-playlist-item {
+			margin:        0;
+			padding:       0.5rem 0;
+			font-size:     1rem;
+			border-bottom: 1px dotted #151515;
+		}
+
+			.wp-playlist-item a { color: inherit; border: none; text-decoration: none; }
+			.wp-playlist-item:hover,
+			.wp-playlist-item a:hover { color: #fff; }
+
+			.wp-playlist-item-title { text-transform: capitalize; }
+
+		.wp-playlist-playing { color: #fff; font-weight: bold; }
+
 /* === WP audio/video player === */
 .audio-image {
 	position: relative;
@@ -531,6 +590,17 @@ video {
 			.mejs-unmute button::after {
 				color: #404040;
 			}
+
+		/* Media playlist */
+		.wp-playlist-playing .wp-playlist-caption::before          { content: '\f452'; }
+		.wp-playlist-current-item .wp-playlist-item-title::before  { content: '\f109'; }
+		.wp-playlist-current-item .wp-playlist-item-album::before  { content: '\f460'; }
+		.wp-playlist-current-item .wp-playlist-item-artist::before { content: '\f304'; }
+
+		.wp-playlist-playing .wp-playlist-caption::before,
+		.wp-playlist-item-meta::before                     { padding-bottom: 2px; }
+		.ltr .wp-playlist-item-meta::before                { padding-right:  3px; }
+		.rtl .wp-playlist-item-meta::before                { padding-left:   3px; }
 
 		.mejs-time .mejs-currenttime,
 		.mejs-time .mejs-duration {
