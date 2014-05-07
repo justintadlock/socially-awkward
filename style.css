@@ -1207,6 +1207,8 @@ img.size-full {}
 			padding-right: 5px;
 			color: #f5f5f5;
 		}
+		.entry-byline .portfolio::before,
+		.entry-footer .portfolio::before { content: '\f460'; }
 
 		.entry-byline .post_tag::before,
 		.entry-footer .post_tag::before {
