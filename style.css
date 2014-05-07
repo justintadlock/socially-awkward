@@ -1048,7 +1048,7 @@ img.size-full {}
 			font-size: 1.5rem;
 		}
 
-		.format-aside .entry-content a.entry-permalink {
+		.format-aside .entry-content a.permalink {
 			font-size:       1.75rem;
 			text-decoration: none;
 		}
