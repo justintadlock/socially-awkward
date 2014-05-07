@@ -34,7 +34,7 @@ textarea {
 }
 
 h1, h2, h3, h4, h5, h6, 
-.comment-author cite, 
+.comment-author, 
 .format-chat cite,
 dt {
 	font-family: 'Open Sans Condensed', sans-serif;
@@ -73,7 +73,7 @@ input[type="reset"],
 /* Genericons */
 .format-chat .chat-author::before,
 .entry-permalink::before,
-.permalink::before,
+.comment-permalink::before,
 .portfolio-item-link::before,
 .comments-link::before, 
 .entry-byline .category::before,
@@ -1181,7 +1181,7 @@ img.size-full {}
 
 		.entry-byline .entry-permalink::before, 
 		.entry-footer .entry-permalink::before,
-		.comment-meta .permalink::before,
+		.comment-meta .comment-permalink::before,
 		.portfolio-item-link::before {
 			content: '\f107';
 			margin-bottom: 3px;
@@ -1222,7 +1222,7 @@ img.size-full {}
 		.entry-byline .entry-permalink,
 		.entry-footer .entry-permalink,
 		.comment-published,
-		.comment-meta .permalink,
+		.comment-meta .comment-permalink,
 		.comment-meta .comment-edit-link,
 		.post-edit-link {
 			margin-right: 10px;
@@ -1644,7 +1644,7 @@ img.size-full {}
 		margin:     0 0 25px;
 	}
 
-		ol.comment-list ol.children {
+		ol.comment-list .children {
 			list-style: none;
 			margin:     0 0 0 50px;
 		}
@@ -1702,7 +1702,6 @@ img.size-full {}
 			/* === Meta === */
 
 			.comment-meta {
-				padding:   12px 0 0;
 				margin:    0 0 25px;
 				margin:    0 0 25px;
 				font-size: 1rem;
@@ -1710,7 +1709,8 @@ img.size-full {}
 			}
 
 				.comment-author {
-					display:   block;
+					display:   inline-block;
+					padding:   12px 0 0;
 					font-size: 1.125rem;
 				}
 
