@@ -6,8 +6,12 @@
  * This file is a test run of these new features.  This means that the contents of this file will 
  * probably be removed in a future version of this theme.
  *
- * @package SociallyAwkward
- * @since   0.1.0
+ * @package    SociallyAwkward
+ * @subpackage Functions
+ * @author     Justin Tadlock <justin@justintadlock.com>
+ * @copyright  Copyright (c) 2013 - 2014, Justin Tadlock
+ * @link       http://themehybrid.com/themes/socially-awkward
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 /* Filter the prev/next posts link attributes. */
