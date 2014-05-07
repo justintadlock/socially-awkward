@@ -51,7 +51,6 @@ function socially_awkward_theme_setup() {
 	/* Load includes. */
 	require_once( trailingslashit( get_template_directory() ) . 'inc/hybrid-core-x.php' );
 	require_once( trailingslashit( get_template_directory() ) . 'inc/media.php' );
-	require_once( trailingslashit( get_template_directory() ) . 'inc/class-get-image.php' );
 
 	/* Get action/filter hook prefix. */
 	$prefix = hybrid_get_prefix();

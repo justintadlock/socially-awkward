@@ -1,40 +1,74 @@
 <article <?php hybrid_attr( 'post' ); ?>>
 
-	<?php if ( is_singular( get_post_type() ) ) { ?>
+	<?php if ( is_attachment() ) : // If viewing a single attachment. ?>
 
-		<?php if ( has_excerpt() ) {
-			$src = wp_get_attachment_image_src( get_the_ID(), 'full' );
-			echo do_shortcode( sprintf( '[caption align="aligncenter" width="%1$s"]%3$s %2$s[/caption]', esc_attr( $src[1] ), get_the_excerpt(), wp_get_attachment_image( get_the_ID(), 'full', false ) ) );
-		} else {
-			echo wp_get_attachment_image( get_the_ID(), 'full', false, array( 'class' => 'aligncenter' ) );
-		} ?>
+		<?php if ( has_excerpt() ) : // If the image has an excerpt/caption. ?>
+
+			<?php $src = wp_get_attachment_image_src( get_the_ID(), 'full' ); ?>
+
+			<?php echo img_caption_shortcode( array( 'align' => 'aligncenter', 'width' => esc_attr( $src[1] ), 'caption' => get_the_excerpt() ), wp_get_attachment_image( get_the_ID(), 'full', false ) ); ?>
+
+		<?php else : // If the image doesn't have a caption. ?>
+
+			<?php echo wp_get_attachment_image( get_the_ID(), 'full', false, array( 'class' => 'aligncenter' ) ); ?>
+
+		<?php endif; // End check for image caption. ?>
 
 		<header class="entry-header">
-			<h1 class="entry-title"><?php single_post_title(); ?></h1>
-			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta"><span class="image-sizes">' . sprintf( __( 'Sizes: %s', 'socially-awkward' ), socially_awkward_get_image_size_links() ) . '</span></div>' ); ?>
+
+			<h1 <?php hybrid_attr( 'entry-title' ); ?>><?php single_post_title(); ?></h1>
+
+			<div class="entry-byline">
+				<span class="image-sizes"><?php printf( __( 'Sizes: %s', 'socially-awkward' ), hybrid_get_image_size_links() ); ?></span>
+			</div><!-- .entry-byline -->
+
 		</header><!-- .entry-header -->
 
-		<div class="entry-content">
+		<div <?php hybrid_attr( 'entry-content' ); ?>>
 			<?php the_content(); ?>
-			<?php wp_link_pages( array( 'before' => '<p class="page-links">' . __( 'Pages:', 'socially-awkward' ), 'after' => '</p>' ) ); ?>
+			<?php wp_link_pages(); ?>
 		</div><!-- .entry-content -->
 
 		<footer class="entry-footer">
-			<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">[entry-published] [entry-edit-link]</div>' ); ?>
+			<time <?php hybrid_attr( 'entry-published' ); ?>><?php echo get_the_date(); ?></time>
+			<?php edit_post_link(); ?>
 		</footer><!-- .entry-footer -->
 
-	<?php } else { ?>
+	<?php else : // If not viewing a single post. ?>
 
 		<header class="entry-header">
-			<?php echo apply_atomic_shortcode( 'entry_title', '[entry-title]' ); ?>
+			<?php the_title( '<h2 ' . hybrid_get_attr( 'entry-title' ) . '><a href="' . get_permalink() . '" rel="bookmark" itemprop="url">', '</a></h2>' ); ?>
 		</header><!-- .entry-header -->
 
-		<div class="entry-summary">
-			<?php if ( current_theme_supports( 'get-the-image' ) ) get_the_image(); ?>
+		<div <?php hybrid_attr( 'entry-summary' ); ?>>
+			<?php get_the_image(); ?>
 			<?php the_excerpt(); ?>
-			<?php wp_link_pages( array( 'before' => '<p class="page-links">' . '<span class="before">' . __( 'Pages:', 'socially-awkward' ) . '</span>', 'after' => '</p>' ) ); ?>
+			<?php wp_link_pages(); ?>
 		</div><!-- .entry-summary -->
 
-	<?php } ?>
+	<?php endif; // End single attachment check. ?>
 
-</article><!-- .hentry -->
+</article><!-- .entry -->
+
+<div class="attachment-meta">
+
+	<div class="image-info">
+
+		<h3><?php _e( 'Image Info', 'socially-awkward' ); ?></h3>
+
+		<?php hybrid_media_meta(); ?>
+
+	</div><!-- .audio-info -->
+
+	<?php $gallery = gallery_shortcode( array( 'columns' => 4, 'numberposts' => 8, 'orderby' => 'rand', 'id' => get_queried_object()->post_parent, 'exclude' => get_the_ID() ) ); ?>
+
+	<?php if ( !empty( $gallery ) ) : // Check if the gallery is not empty. ?>
+
+		<div class="image-gallery">
+			<h3><?php _e( 'Gallery', 'socially-awkward' ); ?></h3>
+			<?php echo $gallery; ?>
+		</div><!-- .image-gallery -->
+
+	<?php endif; // End gallery check ?>
+
+</div><!-- .attachment-meta -->
