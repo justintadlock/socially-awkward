@@ -33,7 +33,7 @@
 
 			foreach ( $formats as $format ) { ?>
 				<li class="menu-item-<?php echo esc_attr( $format ); ?> <?php echo is_tax( 'post_format', "post-format-{$format}" ) ? 'current-menu-item' : ''; ?>">
-				<a href="<?php echo get_post_format_link( $format ); ?>">
+				<a href="<?php echo get_post_format_link( $format ); ?>" title="<?php echo esc_attr( get_post_format_string( $format ) ); ?>">
 					<span class="screen-reader-text"><?php echo get_post_format_string( $format ); ?></span>
 				</a>
 				</li>
