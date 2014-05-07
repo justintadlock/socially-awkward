@@ -6,8 +6,6 @@
 
 				<?php hybrid_get_menu( 'social' ); // Loads the menu/social.php template. ?>
 
-				<div class="footer-content">
-
 				<p class="credit">
 					<?php printf(
 						/* Translators: 1 is current year, 2 is site name/link. */
@@ -20,7 +18,7 @@
 					); ?>
 				</p><!-- .credit -->
 
-			</div>
+			</div><!-- .wrap -->
 
 		</footer><!-- #footer -->
 
