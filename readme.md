@@ -54,6 +54,13 @@ All other resources and theme elements are licensed under the [GNU GPL](http://w
 
 ### Version 1.0.0
 
+* Upgraded to the 2.0 dev branch of the Hybrid Core framework.
+* Overhauled file and folder structure.
+* Switched to a more user-friendly coding style for templates.
+* Dropped a lot of code that is now in Hybrid Core.
+* Added WP playlist support.
+* Upgraded to version 3.0.3 of Genericons, which brings in more icons.
+
 ### Version 0.1.0
 
 * Everything's new!
