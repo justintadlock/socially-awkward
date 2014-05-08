@@ -9,7 +9,7 @@
 			<h1 <?php hybrid_attr( 'entry-title' ); ?>><?php single_post_title(); ?></h1>
 
 			<div class="entry-byline">
-				<?php hybrid_post_terms( array( 'taxonomy' => 'portfolio', 'text' => __( 'Portfolio', 'socially-awkward' ) ) ); ?>
+				<?php hybrid_post_terms( array( 'taxonomy' => 'portfolio', 'text' => __( 'Portfolio: %s', 'socially-awkward' ) ) ); ?>
 			</div><!-- .entry-byline -->
 
 		</header><!-- .entry-header -->
