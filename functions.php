@@ -49,7 +49,7 @@ function socially_awkward_theme_setup() {
 	/* Load styles. */
 	add_theme_support( 
 		'hybrid-core-styles', 
-		array( 'one-five', 'socially-awkward-mediaelement', 'gallery', 'parent', 'style' ) 
+		array( 'socially-awkward-fonts', 'one-five', 'gallery', 'theme-mediaelement', 'parent', 'style' ) 
 	);
 
 	/* Load shortcodes. */
@@ -69,9 +69,6 @@ function socially_awkward_theme_setup() {
 
 	/* Better captions for themes to style. */
 	add_theme_support( 'cleaner-caption' );
-
-	/* Add support for custom theme fonts. */
-	add_theme_support( 'theme-fonts', array( 'callback' => 'socially_awkward_register_fonts' ) );
 
 	/* Automatically add feed links to <head>. */
 	add_theme_support( 'automatic-feed-links' );

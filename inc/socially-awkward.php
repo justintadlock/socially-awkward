@@ -51,8 +51,10 @@ function stargazer_register_styles() {
 	wp_deregister_style( 'mediaelement'    );
 	wp_deregister_style( 'wp-mediaelement' );
 
-	wp_register_style( 'socially-awkward-mediaelement', trailingslashit( get_template_directory_uri() ) . 'css/mediaelement/mediaelement.min.css' );
+	wp_register_style( 'theme-mediaelement',     trailingslashit( get_template_directory_uri() ) . 'css/mediaelement/mediaelement.min.css'                  );
+	wp_register_style( 'socially-awkward-fonts', '//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Open+Sans:400|Open+Sans+Condensed:700' );
 }
+
 /**
  * Loads scripts needed by the theme.
  *
@@ -120,57 +122,6 @@ function socially_awkward_register_nav_menus() {
 
 	if ( post_type_exists( 'portfolio_item' ) )
 		register_nav_menu( 'portfolio', esc_html__( 'Portfolio', 'socially-awkward' ) );
-}
-
-/**
- * Registers custom fonts for the theme.
- *
- * Note that I'm passing an empty array() as the 'selectors' argument. This is so that the Theme Fonts script 
- * won't auto-output the CSS, which I'm simply handling in 'style.css'.  Most likely, this code will change 
- * drastically in future versions as the Theme Fonts class allows more flexibility.
- *
- * @since  0.1.0
- * @access public
- * @param  object  $fonts
- * @return void
- */
-function socially_awkward_register_fonts( $fonts ) {
-
-	/* Body copy. */
-	$fonts->add_setting( array( 'id' => 'body', 'default' => 'lora', 'selectors' => array() ) );
-	$fonts->add_setting( array( 'id' => 'body-italic', 'default' => 'lora-italic', 'selectors' => array() ) );
-	$fonts->add_setting( array( 'id' => 'body-bold', 'default' => 'lora-bold', 'selectors' => array() ) );
-	$fonts->add_setting( array( 'id' => 'body-bold-italic', 'default' => 'lora-bold-italic', 'selectors' => array() ) );
-
-	/* Headers and other bold fonts. */
-	$fonts->add_setting( array( 'id' => 'headers', 'default' => 'open-sans-condensed', 'selectors' => array() ) );
-
-	/* Misc. secondary font. */
-	$fonts->add_setting( array( 'id' => 'accent', 'default' => 'open-sans', 'selectors' => array() ) );
-
-	/* Lora font family (normal, italic, bold, bold italic). */
-	$fonts->add_font(
-		array( 'handle' => 'lora', 'family' => 'Lora', 'type' => 'google' )
-	);
-	$fonts->add_font(
-		array( 'handle' => 'lora-italic', 'family' => 'Lora', 'style' => 'italic', 'type' => 'google' )
-	);
-	$fonts->add_font(
-		array( 'handle' => 'lora-bold', 'family' => 'Lora', 'weight' => 700, 'type' => 'google' )
-	);
-	$fonts->add_font(
-		array( 'handle' => 'lora-bold-italic', 'family' => 'Lora', 'weight' => 700, 'style' => 'italic', 'type' => 'google' )
-	);
-
-	/* Open Sans Condensed font family. */
-	$fonts->add_font(
-		array( 'handle' => 'open-sans-condensed', 'family' => 'Open Sans Condensed', 'weight' => 700, 'type'   => 'google' ) 
-	);
-
-	/* Open Sans font family. */
-	$fonts->add_font(
-		array( 'handle' => 'open-sans', 'family' => 'Open Sans', 'type' => 'google' )
-	);
 }
 
 /**
@@ -571,4 +522,12 @@ function socially_awkward_sub_attachment_image() {
 function socially_awkward_get_image() {
 	_deprecated_function( __FUNCTION__, '1.0.0', 'get_the_image()' );
 	get_the_image();
+}
+
+/**
+ * @since      0.1.0
+ * @deprecated 1.0.0
+ */
+function socially_awkward_register_fonts( $fonts ) {
+	_deprecated_function( __FUNCTION__, '1.0.0', '' );
 }
