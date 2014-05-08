@@ -425,13 +425,15 @@ function socially_awkward_video_atts( $out ) {
  * @deprecated 1.0.0
  */
 function socially_awkward_deregister_styles() {
+	_deprecated_function( __FUNCTION__, '1.0.0', '' );
 }
 
 /**
  * @since      0.1.0
  * @deprecated 1.0.0
  */
-function socially_awkward_styles( $styles ) {
+function socially_awkward_styles() {
+	_deprecated_function( __FUNCTION__, '1.0.0', '' );
 }
 
 /**
@@ -439,6 +441,7 @@ function socially_awkward_styles( $styles ) {
  * @deprecated 1.0.0
  */
 function socially_awkward_entry_comments_link_atts( $out ) {
+	_deprecated_function( __FUNCTION__, '1.0.0', '' );
 	return $out;
 }
 
@@ -447,6 +450,7 @@ function socially_awkward_entry_comments_link_atts( $out ) {
  * @deprecated 1.0.0
  */
 function socially_awkward_get_blog_url() {
+	_deprecated_function( __FUNCTION__, '1.0.0', 'hybrid_get_blog_url()' );
 	return hybrid_get_blog_url();
 }
 
@@ -455,6 +459,7 @@ function socially_awkward_get_blog_url() {
  * @deprecated 1.0.0
  */
 function socially_awkward_get_attachment_id_from_url( $url ) {
+	_deprecated_function( __FUNCTION__, '1.0.0', 'hybrid_get_attachment_id_from_url()' );
 	return hybrid_get_attachment_id_from_url( $url );
 }
 
@@ -463,6 +468,7 @@ function socially_awkward_get_attachment_id_from_url( $url ) {
  * @deprecated 1.0.0
  */
 function socially_awkward_get_file_size_units() {
+	_deprecated_function( __FUNCTION__, '1.0.0', '' );
 }
 
 /**
@@ -470,6 +476,7 @@ function socially_awkward_get_file_size_units() {
  * @deprecated 1.0.0
  */
 function socially_awkward_format_file_size() {
+	_deprecated_function( __FUNCTION__, '1.0.0', '' );
 }
 
 /**
@@ -477,6 +484,7 @@ function socially_awkward_format_file_size() {
  * @deprecated 1.0.0
  */
 function socially_awkward_get_image_size_links() {
+	_deprecated_function( __FUNCTION__, '1.0.0', 'hybrid_get_image_size_links()' );
 	return hybrid_get_image_size_links();
 }
 
@@ -485,6 +493,7 @@ function socially_awkward_get_image_size_links() {
  * @deprecated 1.0.0
  */
 function socially_awkward_get_image_meta() {
+	_deprecated_function( __FUNCTION__, '1.0.0', 'hybrid_media_meta()' );
 	return hybrid_media_meta( array( 'echo' => false ) );
 }
 
@@ -493,6 +502,7 @@ function socially_awkward_get_image_meta() {
  * @deprecated 1.0.0
  */
 function socially_awkward_get_audio_meta() {
+	_deprecated_function( __FUNCTION__, '1.0.0', 'hybrid_media_meta()' );
 	return hybrid_media_meta( array( 'echo' => false ) );
 }
 
@@ -501,15 +511,16 @@ function socially_awkward_get_audio_meta() {
  * @deprecated 1.0.0
  */
 function socially_awkward_get_video_meta() {
+	_deprecated_function( __FUNCTION__, '1.0.0', 'hybrid_media_meta()' );
 	return hybrid_media_meta( array( 'echo' => false ) );
 }
-
 
 /**
  * @since      0.1.0
  * @deprecated 1.0.0
  */
 function socially_awkward_list_media_meta() {
+	_deprecated_function( __FUNCTION__, '1.0.0', '' );
 }
 
 /**
@@ -517,6 +528,7 @@ function socially_awkward_list_media_meta() {
  * @deprecated 1.0.0
  */
 function socially_awkward_list_image_meta() {
+	_deprecated_function( __FUNCTION__, '1.0.0', '' );
 }
 
 /**
@@ -524,6 +536,7 @@ function socially_awkward_list_image_meta() {
  * @deprecated 1.0.0
  */
 function socially_awkward_list_audio_meta() {
+	_deprecated_function( __FUNCTION__, '1.0.0', '' );
 }
 
 /**
@@ -531,6 +544,7 @@ function socially_awkward_list_audio_meta() {
  * @deprecated 1.0.0
  */
 function socially_awkward_list_video_meta() {
+	_deprecated_function( __FUNCTION__, '1.0.0', '' );
 }
 
 /**
@@ -538,6 +552,7 @@ function socially_awkward_list_video_meta() {
  * @deprecated 1.0.0
  */
 function socially_awkward_get_audio_transcript() {
+	_deprecated_function( __FUNCTION__, '1.0.0', 'hybrid_get_audio_transcript()' );
 	return hybrid_get_audio_transcript();
 }
 
@@ -546,6 +561,7 @@ function socially_awkward_get_audio_transcript() {
  * @deprecated 1.0.0
  */
 function socially_awkward_sub_attachment_image() {
+	_deprecated_function( __FUNCTION__, '1.0.0', '' );
 }
 
 /**
@@ -553,5 +569,6 @@ function socially_awkward_sub_attachment_image() {
  * @deprecated 1.0.0
  */
 function socially_awkward_get_image() {
+	_deprecated_function( __FUNCTION__, '1.0.0', 'get_the_image()' );
 	get_the_image();
 }
