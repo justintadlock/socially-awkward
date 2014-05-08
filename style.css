@@ -1878,6 +1878,11 @@ img.size-full {}
 		opacity: 0.5;
 	}
 
+	.form-allowed-tags {
+		margin-top: -1.5rem;
+		font-size:  0.9375rem;
+	}
+
 /**
  * Portfolio Menu
  * --------------------------------------------------------------------------- */
