@@ -1,6 +1,6 @@
-<?php if ( has_nav_menu( 'social' ) ) {
+<?php if ( has_nav_menu( 'social' ) ) : // Check if there's a menu assigned to the 'social' location. ?>
 
-	wp_nav_menu(
+	<?php wp_nav_menu(
 		array(
 			'theme_location'  => 'social',
 			'container'       => 'div',
@@ -13,6 +13,6 @@
 			'link_after'      => '</span>',
 			'fallback_cb'     => '',
 		)
-	);
+	); ?>
 
-} ?>
+<?php endif; // End check for menu. ?>

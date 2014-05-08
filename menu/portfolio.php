@@ -1,4 +1,4 @@
-<?php if ( has_nav_menu( 'portfolio' ) ) { ?>
+<?php if ( has_nav_menu( 'portfolio' ) ) : // Check if there's a menu assigned to the 'portfolio' location. ?>
 
 	<?php wp_nav_menu(
 		array(
@@ -13,9 +13,10 @@
 		)
 	); ?>
 
-<?php } else { ?>
+<?php else : // If there's not a 'portfolio' menu. ?>
 
-	<div id="menu-portfolio">
+	<nav id="menu-portfolio">
+
 		<ul id="menu-portfolio-items" class="menu-items">
 			<?php $type = get_post_type_object( 'portfolio_item' ); ?>
 
@@ -34,7 +35,9 @@
 					'title_li'         => false 
 				) 
 			); ?>
-		</ul>
-	</div>
 
-<?php } ?>
+		</ul><!-- #menu-portfolio-items -->
+
+	</nav><!-- #menu-portfolio -->
+
+<?php endif; // End menu check ?>
