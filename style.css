@@ -82,6 +82,7 @@ input[type="reset"],
 .entry-footer .portfolio::before,
 .entry-byline .post_tag::before,
 .entry-footer .post_tag::before,
+.image-sizes::before,
 .post-edit-link::before,
 .comment-edit-link::before,
 .entry-byline .entry-author a::before,
@@ -1213,6 +1214,13 @@ img.size-full {}
 		.entry-byline .post_tag::before,
 		.entry-footer .post_tag::before {
 			content: '\f302';
+			margin-bottom: 3px;
+			padding-right: 5px;
+			color: #f5f5f5;
+		}
+
+		.image-sizes::before {
+			content: '\f102';
 			margin-bottom: 3px;
 			padding-right: 5px;
 			color: #f5f5f5;
