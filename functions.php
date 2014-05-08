@@ -1,6 +1,6 @@
 <?php
 /**
- * "You know, everyone’s a Democrat until they get a little money. Then they come to their senses." 
+ * "You know, everyone's a Democrat until they get a little money. Then they come to their senses." 
  * ~ Harold Weir (Freaks and Geeks)
  *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
